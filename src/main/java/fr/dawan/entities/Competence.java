@@ -2,8 +2,6 @@ package fr.dawan.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,28 +9,23 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table(name = "domaine")
-public class Domaine {
-    //voir si c'est bon ou si une table existe déjà
+@Table(name = "competence")
+public class Competence {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     
-    public enum domaines {
-        INFORMATIQUE, SECRETARIA, COMMERCIAL
-    }
-    
-    @Column(nullable = false, length = 150)
-    @Enumerated(EnumType.STRING)
-    private domaines domaine;
+    @Column(nullable = false, length = 255)
+    private String competence;
     
     @Version
     private int version;
-    public Domaine() {}
-    public Domaine(long id, domaines domaine, int version) {
+    
+    public Competence() {}
+    public Competence(long id, String competence, int version) {
         super();
         this.id = id;
-        this.domaine = domaine;
+        this.competence = competence;
         this.version = version;
     }
     
@@ -43,11 +36,11 @@ public class Domaine {
         this.id = id;
     }
     
-    public domaines getDomaine() {
-        return domaine;
+    public String getCompetence() {
+        return competence;
     }
-    public void setDomaine(domaines domaine) {
-        this.domaine = domaine;
+    public void setCompetence(String competence) {
+        this.competence = competence;
     }
     
     public int getVersion() {

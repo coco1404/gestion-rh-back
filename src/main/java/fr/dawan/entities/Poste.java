@@ -1,16 +1,17 @@
 package fr.dawan.entities;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 //pb de génération des tables avec el @manytoone : poste, typeContrat, manager
 
@@ -24,20 +25,11 @@ public class Poste {
     @ManyToOne
     private TitrePoste titrePoste;
 
-    @OneToOne
+    @ManyToOne
     private Salarie salarie;
 
     @ManyToOne
-    private Poste poste;
-
-    @ManyToOne
     private TypeContrat typeContrat;
-
-    @Column(nullable = false, length = 255)
-    private String compagnie; // voir s'il n'y a pas de class
-
-    @Column(nullable = false, length = 255)
-    private String implantation; // voir s'il n'y a pas de class
 
     @Column(nullable = false, length = 255)
     private Date dateDebut;
@@ -46,10 +38,10 @@ public class Poste {
     private Date dateFin;
 
     @Column(length = 255)
-    private int volumeHoraire;
+    private float volumeHoraire;
 
     @Column(length = 255)
-    private int volumeJournalier;
+    private float volumeJournalier;
 
     @ManyToOne
     private Salarie manager;
@@ -57,32 +49,39 @@ public class Poste {
     @Column(nullable = false, length = 255)
     private String pj;
 
+    @ManyToOne
+    private Entreprise lieuTravail;
+    
+    @ManyToMany
+    private List<Competence> competenceRequise;
+    
+    @Version
+    private int version;
+    
     public Poste() {
     }
-
-    public Poste(long id, TitrePoste titrePoste, Salarie salarie, Poste poste, TypeContrat typeContrat,
-            String compagnie, String implantation, Date dateDebut, Date dateFin, int volumeHoraire,
-            int volumeJournalier, Salarie manager, String pj) {
+    public Poste(long id, TitrePoste titrePoste, Salarie salarie, TypeContrat typeContrat, Date dateDebut, Date dateFin,
+            float volumeHoraire, float volumeJournalier, Salarie manager, String pj, Entreprise lieuTravail,
+            List<Competence> competenceRequise, int version) {
         super();
         this.id = id;
         this.titrePoste = titrePoste;
         this.salarie = salarie;
-        this.poste = poste;
         this.typeContrat = typeContrat;
-        this.compagnie = compagnie;
-        this.implantation = implantation;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
         this.volumeHoraire = volumeHoraire;
         this.volumeJournalier = volumeJournalier;
         this.manager = manager;
         this.pj = pj;
+        this.lieuTravail = lieuTravail;
+        this.competenceRequise = competenceRequise;
+        this.version = version;
     }
 
     public long getId() {
         return id;
     }
-
     public void setId(long id) {
         this.id = id;
     }
@@ -90,7 +89,6 @@ public class Poste {
     public TitrePoste getTitrePoste() {
         return titrePoste;
     }
-
     public void setTitrePoste(TitrePoste titrePoste) {
         this.titrePoste = titrePoste;
     }
@@ -98,47 +96,20 @@ public class Poste {
     public Salarie getSalarie() {
         return salarie;
     }
-
     public void setSalarie(Salarie salarie) {
         this.salarie = salarie;
-    }
-
-    public Poste getPoste() {
-        return poste;
-    }
-
-    public void setPoste(Poste poste) {
-        this.poste = poste;
     }
 
     public TypeContrat getTypeContrat() {
         return typeContrat;
     }
-
     public void setTypeContrat(TypeContrat typeContrat) {
         this.typeContrat = typeContrat;
-    }
-
-    public String getCompagnie() {
-        return compagnie;
-    }
-
-    public void setCompagnie(String compagnie) {
-        this.compagnie = compagnie;
-    }
-
-    public String getImplantation() {
-        return implantation;
-    }
-
-    public void setImplantation(String implantation) {
-        this.implantation = implantation;
     }
 
     public Date getDateDebut() {
         return dateDebut;
     }
-
     public void setDateDebut(Date dateDebut) {
         this.dateDebut = dateDebut;
     }
@@ -146,31 +117,27 @@ public class Poste {
     public Date getDateFin() {
         return dateFin;
     }
-
     public void setDateFin(Date dateFin) {
         this.dateFin = dateFin;
     }
 
-    public int getVolumeHoraire() {
+    public float getVolumeHoraire() {
         return volumeHoraire;
     }
-
-    public void setVolumeHoraire(int volumeHoraire) {
+    public void setVolumeHoraire(float volumeHoraire) {
         this.volumeHoraire = volumeHoraire;
     }
 
-    public int getVolumeJournalier() {
+    public float getVolumeJournalier() {
         return volumeJournalier;
     }
-
-    public void setVolumeJournalier(int volumeJournalier) {
+    public void setVolumeJournalier(float volumeJournalier) {
         this.volumeJournalier = volumeJournalier;
     }
 
     public Salarie getManager() {
         return manager;
     }
-
     public void setManager(Salarie manager) {
         this.manager = manager;
     }
@@ -178,8 +145,27 @@ public class Poste {
     public String getPj() {
         return pj;
     }
-
     public void setPj(String pj) {
         this.pj = pj;
     }
+    
+    public Entreprise getLieuTravail() {
+        return lieuTravail;
+    }
+    public void setLieuTravail(Entreprise lieuTravail) {
+        this.lieuTravail = lieuTravail;
+    }
+    
+    public List<Competence> getCompetenceRequise() {
+        return competenceRequise;
+    }
+    public void setCompetenceRequise(List<Competence> competenceRequise) {
+        this.competenceRequise = competenceRequise;
+    }
+    public int getVersion() {
+        return version;
+    }
+    public void setVersion(int version) {
+        this.version = version;
+    }    
 }

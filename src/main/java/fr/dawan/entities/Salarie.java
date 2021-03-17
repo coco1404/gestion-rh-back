@@ -36,8 +36,8 @@ public class Salarie {
     @Column(length = 50)
     private String mobilPersonnel;
 
-    @Column(nullable = false, length = 255)
-    private String adresse;
+    @ManyToOne
+    private Adresse adresse;
 
     @Column(nullable = false, length = 255)
     private Date dateNaissance;
@@ -54,13 +54,28 @@ public class Salarie {
     @ManyToMany
     private List<Role> role;
 
+    @ManyToMany
+    private List<Competence> competence;
+
+    @Column(nullable = false)
+    private boolean siManager;
+
+    @ManyToOne
+    private Entreprise entreprise;
+
+    @ManyToMany
+    private List<Formation> formation;
+
     @Version
     private int version;
 
-    public Salarie() {}
+    public Salarie() {
+    }
+
     public Salarie(long id, String nom, String prenom, String motDePasse, String telPersonnel, String mobilPersonnel,
-            String adresse, Date dateNaissance, String telProfessionnel, String mobileProfessionnel, Domaine domaine,
-            List<Role> role, int version) {
+            Adresse adresse, Date dateNaissance, String telProfessionnel, String mobileProfessionnel, Domaine domaine,
+            List<Role> role, List<Competence> competence, boolean siManager, Entreprise entreprise,
+            List<Formation> formation, int version) {
         super();
         this.id = id;
         this.nom = nom;
@@ -74,6 +89,10 @@ public class Salarie {
         this.mobileProfessionnel = mobileProfessionnel;
         this.domaine = domaine;
         this.role = role;
+        this.competence = competence;
+        this.siManager = siManager;
+        this.entreprise = entreprise;
+        this.formation = formation;
         this.version = version;
     }
 
@@ -125,11 +144,11 @@ public class Salarie {
         this.mobilPersonnel = mobilPersonnel;
     }
 
-    public String getAdresse() {
+    public Adresse getAdresse() {
         return adresse;
     }
 
-    public void setAdresse(String adresse) {
+    public void setAdresse(Adresse adresse) {
         this.adresse = adresse;
     }
 
@@ -168,10 +187,43 @@ public class Salarie {
     public List<Role> getRole() {
         return role;
     }
+
     public void setRole(List<Role> role) {
         this.role = role;
     }
-    
+
+    public List<Competence> getCompetence() {
+        return competence;
+    }
+
+    public void setCompetence(List<Competence> competence) {
+        this.competence = competence;
+    }
+
+    public boolean isSiManager() {
+        return siManager;
+    }
+
+    public void setSiManager(boolean siManager) {
+        this.siManager = siManager;
+    }
+
+    public Entreprise getEntreprise() {
+        return entreprise;
+    }
+
+    public void setEntreprise(Entreprise entreprise) {
+        this.entreprise = entreprise;
+    }
+
+    public List<Formation> getFormation() {
+        return formation;
+    }
+
+    public void setFormation(List<Formation> formation) {
+        this.formation = formation;
+    }
+
     public int getVersion() {
         return version;
     }
