@@ -15,5 +15,33 @@ public class TitrePosteDto implements Serializable {
 
     @XmlElement
     private long id;
+    
+    @XmlElement
+    private String intitule;
 
+    public TitrePosteDto() {
+    }
+
+    public TitrePosteDto(long id, String intitule) {
+        super();
+        this.id = id;
+        this.intitule = intitule;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getIntitule() {
+        return intitule;
+    }
+
+    public void setIntitule(String intitule) {
+        this.intitule = intitule;
+    }
+    
 }
