@@ -9,44 +9,42 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table(name = "titreposte")
+@Table(name = "titrespostes")
 public class TitrePoste {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
+
     @Column(nullable = false, length = 255)
-    private String titrePoste;
-    
+    private String intitule;
+
     @Version
     private int version;
-    
-    public TitrePoste() {}    
-    public TitrePoste(long id, String titrePoste, int version) {
-        super();
-        this.id = id;
-        this.titrePoste = titrePoste;
-        this.version = version;
+
+    public TitrePoste() {
     }
 
     public long getId() {
         return id;
     }
+
     public void setId(long id) {
         this.id = id;
     }
-    
-    public String getTitrePoste() {
-        return titrePoste;
+
+    public String getIntitule() {
+        return intitule;
     }
-    public void setTitrePoste(String titrePoste) {
-        this.titrePoste = titrePoste;
+
+    public void setIntitule(String intitule) {
+        this.intitule = intitule;
     }
-    
+
     public int getVersion() {
         return version;
     }
+
     public void setVersion(int version) {
         this.version = version;
     }

@@ -1,61 +1,67 @@
 package fr.dawan.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table(name = "role")
+@Table(name = "roles")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
-    
-    public enum roles {
-        SALARIE, ADMIN, RH, MANAGER
-    }
-    
+
     @Column(nullable = false, length = 150)
-    @Enumerated(EnumType.STRING)
-    private roles role;
-    
+    private String titre;
+
+    @ManyToMany
+    @JoinColumn(nullable = false)
+    private List<Salarie> salaries;
+
     @Version
     private int version;
-    
-    public Role() {}
-    public Role(long id, roles role, int version) {
-        super();
-        this.id = id;
-        this.role = role;
-        this.version = version;
+
+    public Role() {
     }
+
     public long getId() {
         return id;
     }
+
     public void setId(long id) {
         this.id = id;
     }
-    
-    public roles getRole() {
-        return role;
+
+    public String getTitre() {
+        return titre;
     }
-    public void setRole(roles role) {
-        this.role = role;
+
+    public void setTitre(String titre) {
+        this.titre = titre;
     }
-    
+
+    public List<Salarie> getSalaries() {
+        return salaries;
+    }
+
+    public void setSalaries(List<Salarie> salaries) {
+        this.salaries = salaries;
+    }
+
     public int getVersion() {
         return version;
     }
+
     public void setVersion(int version) {
         this.version = version;
     }
-    
-    
+
 }

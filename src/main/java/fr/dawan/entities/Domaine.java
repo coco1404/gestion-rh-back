@@ -2,8 +2,6 @@ package fr.dawan.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,51 +9,44 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table(name = "domaine")
+@Table(name = "domaines")
 public class Domaine {
-    //voir si c'est bon ou si une table existe déjà
+    // voir si c'est bon ou si une table existe déjà
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
-    public enum domaines {
-        INFORMATIQUE, SECRETARIA, COMMERCIAL
-    }
-    
+
     @Column(nullable = false, length = 150)
-    @Enumerated(EnumType.STRING)
-    private domaines domaine;
-    
+    private String titre;
+
     @Version
     private int version;
-    public Domaine() {}
-    public Domaine(long id, domaines domaine, int version) {
-        super();
-        this.id = id;
-        this.domaine = domaine;
-        this.version = version;
+
+    public Domaine() {
     }
-    
+
     public long getId() {
         return id;
     }
+
     public void setId(long id) {
         this.id = id;
     }
-    
-    public domaines getDomaine() {
-        return domaine;
+
+    public String getTitre() {
+        return titre;
     }
-    public void setDomaine(domaines domaine) {
-        this.domaine = domaine;
+
+    public void setTitre(String titre) {
+        this.titre = titre;
     }
-    
+
     public int getVersion() {
         return version;
     }
+
     public void setVersion(int version) {
         this.version = version;
     }
-    
-    
+
 }

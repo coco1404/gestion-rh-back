@@ -1,102 +1,94 @@
 package fr.dawan.entities;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
 @Entity
-@Table(name = "entretien")
+@Table(name = "entretiens")
 public class Entretien {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
-    @Column(nullable = false, length = 255)
+
+    @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date dateEntretien;
-    
-    @OneToOne
+
+    @ManyToOne
     private CompteRendu compteRendu;
-    
-    @OneToMany
-    private List<Salarie> salarie;
-    
+
     @ManyToOne
-    private Salarie manager;
+    @JoinColumn(nullable = false)
+    private Salarie salarie;
     
+    /**
+     * manager ou RH qui fait l'entretien du salarié
+     */
     @ManyToOne
-    private Salarie rh;    
-    
+    @JoinColumn(nullable = false)
+    private Salarie managerEntretien;
+
     @Version
     private int version;
-    
-    public Entretien() {}
-    public Entretien(long id, Date dateEntretien, CompteRendu compteRendu, List<Salarie> salarie, Salarie manager,
-            Salarie rh, int version) {
-        super();
-        this.id = id;
-        this.dateEntretien = dateEntretien;
-        this.compteRendu = compteRendu;
-        this.salarie = salarie;
-        this.manager = manager;
-        this.rh = rh;
-        this.version = version;
+
+    public Entretien() {
     }
-    
+
     public long getId() {
         return id;
     }
+
     public void setId(long id) {
         this.id = id;
     }
-    
+
     public Date getDateEntretien() {
         return dateEntretien;
     }
+
     public void setDateEntretien(Date dateEntretien) {
         this.dateEntretien = dateEntretien;
     }
-    
+
     public CompteRendu getCompteRendu() {
         return compteRendu;
     }
+
     public void setCompteRendu(CompteRendu compteRendu) {
         this.compteRendu = compteRendu;
     }
-    
-    public List<Salarie> getSalarie() {
+
+    public Salarie getSalarie() {
         return salarie;
     }
-    public void setSalarie(List<Salarie> salarie) {
+
+    public void setSalarie(Salarie salarie) {
         this.salarie = salarie;
     }
-    
-    public Salarie getManager() {
-        return manager;
+
+    public Salarie getManagerEntretien() {
+        return managerEntretien;
     }
-    public void setManager(Salarie manager) {
-        this.manager = manager;
+
+    public void setManagerEntretien(Salarie managerEntretien) {
+        this.managerEntretien = managerEntretien;
     }
-    
-    public Salarie getRh() {
-        return rh;
-    }
-    public void setRh(Salarie rh) {
-        this.rh = rh;
-    }
-    
+
     public int getVersion() {
         return version;
     }
+
     public void setVersion(int version) {
         this.version = version;
     }

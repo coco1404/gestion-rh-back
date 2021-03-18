@@ -8,13 +8,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
 @Entity
-@Table(name = "salarie")
+@Table(name = "salaries")
 public class Salarie {
 
     @Id
@@ -26,6 +29,9 @@ public class Salarie {
 
     @Column(nullable = false, length = 255)
     private String prenom;
+    
+    @Column(nullable = false, length = 255)
+    private String email;
 
     @Column(nullable = false, length = 255)
     private String motDePasse;
@@ -37,9 +43,11 @@ public class Salarie {
     private String mobilPersonnel;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Adresse adresse;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date dateNaissance;
 
     @Column(length = 50)
@@ -49,51 +57,29 @@ public class Salarie {
     private String mobileProfessionnel;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Domaine domaine;
 
-    @ManyToMany
-    private List<Role> role;
+    @ManyToMany(mappedBy = "salaries")
+    private List<Role> roles;
 
-    @ManyToMany
-    private List<Competence> competence;
+    @ManyToMany(mappedBy = "salaries")
+    private List<Competence> competences;
 
     @Column(nullable = false)
     private boolean siManager;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Entreprise entreprise;
 
-    @ManyToMany
-    private List<Formation> formation;
+    @ManyToMany(mappedBy = "salaries")
+    private List<Formation> formations;
 
     @Version
     private int version;
 
     public Salarie() {
-    }
-
-    public Salarie(long id, String nom, String prenom, String motDePasse, String telPersonnel, String mobilPersonnel,
-            Adresse adresse, Date dateNaissance, String telProfessionnel, String mobileProfessionnel, Domaine domaine,
-            List<Role> role, List<Competence> competence, boolean siManager, Entreprise entreprise,
-            List<Formation> formation, int version) {
-        super();
-        this.id = id;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.motDePasse = motDePasse;
-        this.telPersonnel = telPersonnel;
-        this.mobilPersonnel = mobilPersonnel;
-        this.adresse = adresse;
-        this.dateNaissance = dateNaissance;
-        this.telProfessionnel = telProfessionnel;
-        this.mobileProfessionnel = mobileProfessionnel;
-        this.domaine = domaine;
-        this.role = role;
-        this.competence = competence;
-        this.siManager = siManager;
-        this.entreprise = entreprise;
-        this.formation = formation;
-        this.version = version;
     }
 
     public long getId() {
@@ -118,6 +104,14 @@ public class Salarie {
 
     public void setPrenom(String prenom) {
         this.prenom = prenom;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getMotDePasse() {
@@ -184,22 +178,6 @@ public class Salarie {
         this.domaine = domaine;
     }
 
-    public List<Role> getRole() {
-        return role;
-    }
-
-    public void setRole(List<Role> role) {
-        this.role = role;
-    }
-
-    public List<Competence> getCompetence() {
-        return competence;
-    }
-
-    public void setCompetence(List<Competence> competence) {
-        this.competence = competence;
-    }
-
     public boolean isSiManager() {
         return siManager;
     }
@@ -216,12 +194,28 @@ public class Salarie {
         this.entreprise = entreprise;
     }
 
-    public List<Formation> getFormation() {
-        return formation;
+    public List<Role> getRoles() {
+        return roles;
     }
 
-    public void setFormation(List<Formation> formation) {
-        this.formation = formation;
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    public List<Competence> getCompetences() {
+        return competences;
+    }
+
+    public void setCompetences(List<Competence> competences) {
+        this.competences = competences;
+    }
+
+    public List<Formation> getFormations() {
+        return formations;
+    }
+
+    public void setFormations(List<Formation> formations) {
+        this.formations = formations;
     }
 
     public int getVersion() {
