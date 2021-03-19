@@ -1,5 +1,17 @@
 package fr.dawan.services;
 
-public interface FormationService {
+import java.util.Date;
+import java.util.List;
 
+import fr.dawan.dto.FormationDto;
+
+public interface FormationService {
+    List<FormationDto> getAllFormation(int page, int size);
+    List<FormationDto> getAllFormationEnCours(int page, int size);
+    List<FormationDto> getAllFormationNonCommence(int page, int size);
+    List<FormationDto> getAllFormationByIdCompetence(long idCompetence);
+    List<FormationDto> getAllFormationByDate(Date date);
+    List<FormationDto> getAllFormationByPeriode(Date dateDebut, Date dateFin);
+    void deleteById(long id);
+    FormationDto saveOrUpdate(FormationDto formationDto); 
 }
