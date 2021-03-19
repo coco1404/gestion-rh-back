@@ -59,7 +59,7 @@ public class SalarieController {
     }
     
     @GetMapping(value = "/{id}", produces = { "application/json", "application/xml" })
-    public SalarieDto getEntretienById(@PathVariable("id") long id) {
+    public SalarieDto getEntretieSalarieById(@PathVariable("id") long id) {
         return salarieService.findById(id);
     }
     
@@ -74,12 +74,12 @@ public class SalarieController {
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public SalarieDto saveEntretien(@RequestBody SalarieDto salarieDto) {
+    public SalarieDto saveSalarie(@RequestBody SalarieDto salarieDto) {
         return salarieService.saveOrUpdate(salarieDto);
     }
     
     @PutMapping(consumes = "application/json", produces = "application/json")
-    public SalarieDto updateEntretien(@RequestBody SalarieDto salarieDto) {
+    public SalarieDto updateSalarie(@RequestBody SalarieDto salarieDto) {
         return salarieService.saveOrUpdate(salarieDto);
     }
 

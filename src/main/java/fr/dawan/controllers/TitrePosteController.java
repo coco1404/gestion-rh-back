@@ -44,7 +44,7 @@ public class TitrePosteController {
     }
     
     @GetMapping(value = "/search", produces = { "application/json", "application/xml" })
-    public TitrePosteDto getTypeContratByName(@RequestParam("name") String name) {
+    public TitrePosteDto getTitrePosteByName(@RequestParam("name") String name) {
         return titrePosteService.findByName(name);
     }
     

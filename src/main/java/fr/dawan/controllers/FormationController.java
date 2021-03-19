@@ -27,7 +27,7 @@ public class FormationController {
     FormationService formationService;
     
     @GetMapping(value = "/{page}/{size}", produces = "application/json")
-    public List<FormationDto> getAllPosteByPage(@PathVariable("page") int page, @PathVariable("size") int size) {
+    public List<FormationDto> getAllFormationByPage(@PathVariable("page") int page, @PathVariable("size") int size) {
         return formationService.getAllFormation(page, size);
     }
     
@@ -57,17 +57,17 @@ public class FormationController {
     }
     
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public FormationDto savePoste(@RequestBody FormationDto fDto) {
+    public FormationDto saveFormation(@RequestBody FormationDto fDto) {
         return formationService.saveOrUpdate(fDto);
     }
 
     @PutMapping(consumes = "application/json", produces = "application/json")
-    public FormationDto updatePoste(@RequestBody FormationDto fDto) {
+    public FormationDto updateFormation(@RequestBody FormationDto fDto) {
         return formationService.saveOrUpdate(fDto);
     }
     
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<?> deleteByIdPoste(@PathVariable(value = "id", required = true) long id) {
+    public ResponseEntity<?> deleteByIdFormation(@PathVariable(value = "id", required = true) long id) {
         try {
             formationService.deleteById(id);
             return ResponseEntity.status(HttpStatus.ACCEPTED).body("Suppresion effectuée");

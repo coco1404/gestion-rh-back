@@ -27,18 +27,18 @@ public class DomaineController {
     
     
     @GetMapping(value = "/", produces = "application/json")
-    public @ResponseBody List<DomaineDto> getAllAdresse() {
+    public @ResponseBody List<DomaineDto> getAllDomaine() {
         return domaineService.findAll();
     }
     
     @GetMapping(value = "/{page}/{size}", produces = "application/json")
-    public @ResponseBody List<DomaineDto> getAllAdresseByPage(@PathVariable("page") int page,
+    public @ResponseBody List<DomaineDto> getAllDomaineByPage(@PathVariable("page") int page,
             @PathVariable(value = "size") int size) {
         return domaineService.getAllDomaines(page, size);
     }
     
     @GetMapping(value = "/{id}", produces = { "application/json", "application/xml" })
-    public DomaineDto getAdresseById(@PathVariable("id") long id) {
+    public DomaineDto getDomaineById(@PathVariable("id") long id) {
         return domaineService.getById(id);// status = ok, body (objet retourné)
     }
     
@@ -48,12 +48,12 @@ public class DomaineController {
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public DomaineDto saveAdresse(@RequestBody DomaineDto dDto) {
+    public DomaineDto saveDomaine(@RequestBody DomaineDto dDto) {
         return domaineService.saveOrUpdate(dDto);
     }
     
     @PutMapping(consumes = "application/json", produces = "application/json")
-    public DomaineDto updateAdresse(@RequestBody DomaineDto dDto) {
+    public DomaineDto updateDomaine(@RequestBody DomaineDto dDto) {
         return domaineService.saveOrUpdate(dDto);
     }
 
