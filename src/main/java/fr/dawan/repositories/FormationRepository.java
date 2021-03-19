@@ -35,5 +35,8 @@ public interface FormationRepository extends JpaRepository<Formation, Long>{
             + " WHERE f.dateDebut < :dateDebut "
             + " AND f.dateFin > :dateFin ")
     List<Formation> getAllFormationByPeriode(@Param("date") Date dateDebut, @Param("date") Date dateFin);
+    
+    @Query(" FROM Formation f JOIN f.salaries fs WHERE fs.id = :id")
+    List<Formation> findFormationBySalarie(@Param("id")long id);
 
 }

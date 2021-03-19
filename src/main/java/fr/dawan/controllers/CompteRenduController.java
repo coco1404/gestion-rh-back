@@ -1,5 +1,7 @@
 package fr.dawan.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,19 +25,35 @@ public class CompteRenduController {
     CompteRenduService compteRenduService;
     
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public CompteRenduDto savePoste(@RequestBody CompteRenduDto cpDto) {
+    public CompteRenduDto saveCompteRendu(@RequestBody CompteRenduDto cpDto) {
         return compteRenduService.saveOrUpdate(cpDto);
     }
 
     @PutMapping(consumes = "application/json", produces = "application/json")
-    public CompteRenduDto updatePoste(@RequestBody CompteRenduDto cpDto) {
+    public CompteRenduDto updateConpteRendu(@RequestBody CompteRenduDto cpDto) {
         return compteRenduService.saveOrUpdate(cpDto);
     }
     
     @GetMapping(value = "/{idCompteRendu}", produces = "application/json")
-    public CompteRenduDto getAllPosteByTypeContrat(@PathVariable("idCompteRendu") long idCompteRendu) {
+    public CompteRenduDto getCompteRenduById(@PathVariable("idCompteRendu") long idCompteRendu) {
         return compteRenduService.getCompteRenduById(idCompteRendu);
     }
+    
+    @GetMapping(value = "/entretien/{idEntretien}", produces = "application/json")
+    public List<CompteRenduDto> getCompteRenduByEntretien(@PathVariable("idEntretien") long idEntretien) {
+        return compteRenduService.getCompteRenduByIdEntretien(idEntretien);
+    }
+    
+    @GetMapping(value = "/manager/{idManager}", produces = "application/json")
+    public List<CompteRenduDto> getCompteRenduByManager(@PathVariable("idManager") long idManager) {
+        return compteRenduService.getCompteRenduByIdManagerEntretien(idManager);
+    }
+    
+    @GetMapping(value = "/manager/{idSalarie}", produces = "application/json")
+    public List<CompteRenduDto> getCompteRenduBySalarie(@PathVariable("idSalarie") long idSalarie) {
+        return compteRenduService.getCompteRenduByIdSalarie(idSalarie);
+    }
+    
     
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> deleteByIdPoste(@PathVariable(value = "id", required = true) long id) {

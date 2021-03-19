@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import fr.dawan.dto.CompetenceDto;
 import fr.dawan.dto.FormationDto;
 import fr.dawan.dto.RoleDto;
 import fr.dawan.dto.SalarieDto;
@@ -71,6 +72,11 @@ public class SalarieController {
     @GetMapping(value = "/{id}/roles", produces = "application/json")
     public @ResponseBody List<RoleDto> getRoleBySalarie(@PathVariable("id") long id) {
         return salarieService.findRoleBySalarie(id);
+    }
+    
+    @GetMapping(value = "/{id}/competences", produces = "application/json")
+    public @ResponseBody List<CompetenceDto> getCompetenceBySalarie(@PathVariable("id") long id) {
+        return salarieService.findCompetenceBySalarie(id);
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")

@@ -10,9 +10,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import fr.dawan.dto.CompetenceDto;
 import fr.dawan.dto.FormationDto;
 import fr.dawan.dto.RoleDto;
 import fr.dawan.dto.SalarieDto;
+import fr.dawan.entities.Competence;
+import fr.dawan.entities.Formation;
 import fr.dawan.entities.Role;
 import fr.dawan.entities.Salarie;
 import fr.dawan.mappers.MapperCommun;
@@ -120,8 +123,12 @@ public class SalarieServiceImpl implements SalarieService{
 
     @Override
     public List<FormationDto> findFormationBySalarie(long id) {
-        // TODO Auto-generated method stub
-        return null;
+        List<Formation> lst = formationRepository.findFormationBySalarie(id);
+        List<FormationDto> result = new ArrayList<FormationDto>();
+        for(Formation formation : lst) {
+         result.add(MapperCommun.convert(formation, FormationDto.class));
+        }
+        return result;
     }
 
     @Override
@@ -130,6 +137,16 @@ public class SalarieServiceImpl implements SalarieService{
         List<RoleDto> result = new ArrayList<RoleDto>();
         for(Role role : lst) {
          result.add(MapperCommun.convert(role, RoleDto.class));
+        }
+        return result;
+    }
+    
+    @Override
+    public List<CompetenceDto> findCompetenceBySalarie(long id) {
+        List<Competence> lst = competenceRepository.findCompetenceBySalarie(id);
+        List<CompetenceDto> result = new ArrayList<CompetenceDto>();
+        for(Competence competence : lst) {
+         result.add(MapperCommun.convert(competence, CompetenceDto.class));
         }
         return result;
     }
