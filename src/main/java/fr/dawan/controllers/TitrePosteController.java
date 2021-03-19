@@ -27,7 +27,7 @@ public class TitrePosteController {
     private TitrePosteService titrePosteService;
     
     
-    @GetMapping(value = "/", produces = "application/json")
+    @GetMapping(produces = "application/json")
     public @ResponseBody List<TitrePosteDto> getAllTitrePoste() {
         return titrePosteService.findAll();
     }

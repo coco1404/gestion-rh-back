@@ -20,26 +20,22 @@ public class CompetenceDto implements Serializable {
     @XmlElement
     private String nom;
 
-    @XmlElement
-    private List<SalarieDto> salaries;
-
-    @XmlElement
-    private List<FormationDto> formations;
-
-    @XmlElement
-    private List<PosteDto> postes;
+//    @XmlElement
+//    private List<SalarieDto> salaries;
+//
+//    @XmlElement
+//    private List<FormationDto> formations;
+//
+//    @XmlElement
+//    private List<PosteDto> postes;
 
     public CompetenceDto() {
     }
 
-    public CompetenceDto(long id, String nom, List<SalarieDto> salaries, List<FormationDto> formations,
-            List<PosteDto> postes) {
-        super();
+    
+    public CompetenceDto(long id, String nom) {
         this.id = id;
         this.nom = nom;
-        this.salaries = salaries;
-        this.formations = formations;
-        this.postes = postes;
     }
 
     public long getId() {
@@ -58,27 +54,27 @@ public class CompetenceDto implements Serializable {
         this.nom = nom;
     }
 
-    public List<SalarieDto> getSalaries() {
-        return salaries;
-    }
-
-    public void setSalaries(List<SalarieDto> salaries) {
-        this.salaries = salaries;
-    }
-
-    public List<FormationDto> getFormations() {
-        return formations;
-    }
-
-    public void setFormations(List<FormationDto> formations) {
-        this.formations = formations;
-    }
-
-    public List<PosteDto> getPostes() {
-        return postes;
-    }
-
-    public void setPostes(List<PosteDto> postes) {
-        this.postes = postes;
-    }
+//    public List<SalarieDto> getSalaries() {
+//        return salaries;
+//    }
+//
+//    public void setSalaries(List<SalarieDto> salaries) {
+//        this.salaries = salaries;
+//    }
+//
+//    public List<FormationDto> getFormations() {
+//        return formations;
+//    }
+//
+//    public void setFormations(List<FormationDto> formations) {
+//        this.formations = formations;
+//    }
+//
+//    public List<PosteDto> getPostes() {
+//        return postes;
+//    }
+//
+//    public void setPostes(List<PosteDto> postes) {
+//        this.postes = postes;
+//    }
 }

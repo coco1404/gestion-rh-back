@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -48,12 +49,12 @@ public class FormationController {
     }
     
     @GetMapping(value = "/date", produces = "application/json")
-    public List<FormationDto> getAllFormationByDate(@RequestParam(value = "date", required = true) Date date) {
+    public List<FormationDto> getAllFormationByDate(@RequestParam(value = "date", required = true) @DateTimeFormat(pattern="yyyy-MM-dd") Date date) {
         return formationService.getAllFormationByDate(date);
     }
     
     @GetMapping(value = "/periode", produces = "application/json")
-    public List<FormationDto> getAllFormationByPeriode(@RequestParam(value = "dateDebut", required = true) Date dateDebut, @RequestParam(value = "dateFin", required = true) Date dateFin) {
+    public List<FormationDto> getAllFormationByPeriode(@RequestParam(value = "dateDebut", required = true) @DateTimeFormat(pattern="yyyy-MM-dd") Date dateDebut, @RequestParam(value = "dateFin", required = true) @DateTimeFormat(pattern="yyyy-MM-dd") Date dateFin) {
         return formationService.getAllFormationByPeriode(dateDebut, dateFin);
     }
     

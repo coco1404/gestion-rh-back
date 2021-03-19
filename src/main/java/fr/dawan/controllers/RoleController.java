@@ -26,7 +26,7 @@ public class RoleController {
     private RoleService roleService;
     
     
-    @GetMapping(value = "/", produces = "application/json")
+    @GetMapping(produces = "application/json")
     public @ResponseBody List<RoleDto> getAllRoles() {
         return roleService.findAll();
     }

@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,28 +37,28 @@ public class PosteController {
         return posteService.getAllPoste(page, size);
     }
     
-    @GetMapping(value = "/{idTypeContrat}", produces = "application/json")
+    @GetMapping(value = "/typecontrat/{idTypeContrat}", produces = "application/json")
     public List<PosteDto> getAllPosteByTypeContrat(@PathVariable("idTypeContrat") long idTypeContrat) {
         return posteService.getPosteByTypeContrat(idTypeContrat);
     }
     
-    @GetMapping(value = "/{idManager}", produces = "application/json")
+    @GetMapping(value = "/manager/{idManager}", produces = "application/json")
     public List<PosteDto> getPosteByManager(@PathVariable("idManager") long idManager) {
         return posteService.getPosteByManager(idManager);
     }
     
-    @GetMapping(value = "/{idLieuTravail}", produces = "application/json")
+    @GetMapping(value = "/adresse/{idLieuTravail}", produces = "application/json")
     public List<PosteDto> getPosteByLieuTravail(@PathVariable("idLieuTravail") long idLieuTravail) {
         return posteService.getPosteByLieuTravail(idLieuTravail);
     }
     
-    @PostMapping(value = "/recherche",consumes = "application/json", produces = "application/json")
-    public List<PosteDto> recherche(@RequestParam(value = "recherche", required = true) String recherche) {
-        return posteService.recherchePoste(recherche);
+    @GetMapping(value = "/recherche", produces = "application/json")
+    public List<PosteDto> recherche(@RequestParam(value = "initilue", required = true) String initilue) {
+        return posteService.recherchePoste(initilue);
     }
     
-    @PostMapping(value = "/rechercheDate",consumes = "application/json", produces = "application/json")
-    public List<PosteDto> recherche(@RequestParam(value = "dateDebut", required = true) Date dateDebut, @RequestParam(value = "dateFin", required = true) Date dateFin) {
+    @GetMapping(value = "/rechercheDate", produces = "application/json")
+    public List<PosteDto> rechercheDate(@RequestParam(value = "dateDebut", required = true) @DateTimeFormat(pattern="yyyy-MM-dd") Date dateDebut, @RequestParam(value = "dateFin", required = true) @DateTimeFormat(pattern="yyyy-MM-dd") Date dateFin) {
         return posteService.recherchePoste(dateDebut, dateFin);
     }
     

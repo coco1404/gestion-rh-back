@@ -26,7 +26,7 @@ public class EntrepriseController {
     private EntrepriseService entrepriseService;
     
     
-    @GetMapping(value = "/", produces = "application/json")
+    @GetMapping(produces = "application/json")
     public @ResponseBody List<EntrepriseDto> getAllEntreprises() {
         return entrepriseService.findAll();
     }

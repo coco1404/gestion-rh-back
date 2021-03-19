@@ -49,14 +49,14 @@ public class CompteRenduController {
         return compteRenduService.getCompteRenduByIdManagerEntretien(idManager);
     }
     
-    @GetMapping(value = "/manager/{idSalarie}", produces = "application/json")
+    @GetMapping(value = "/salarie/{idSalarie}", produces = "application/json")
     public List<CompteRenduDto> getCompteRenduBySalarie(@PathVariable("idSalarie") long idSalarie) {
         return compteRenduService.getCompteRenduByIdSalarie(idSalarie);
     }
     
     
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<?> deleteByIdPoste(@PathVariable(value = "id", required = true) long id) {
+    public ResponseEntity<?> deleteById(@PathVariable(value = "id", required = true) long id) {
         try {
             compteRenduService.deleteById(id);
             return ResponseEntity.status(HttpStatus.ACCEPTED).body("Suppresion effectuée");

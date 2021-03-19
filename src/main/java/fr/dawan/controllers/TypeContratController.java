@@ -26,7 +26,7 @@ public class TypeContratController {
     private TypeContratService typeContratService;
     
     
-    @GetMapping(value = "/", produces = "application/json")
+    @GetMapping(produces = "application/json")
     public @ResponseBody List<TypeContratDto> getAllTypeContrat() {
         return typeContratService.findAll();
     }

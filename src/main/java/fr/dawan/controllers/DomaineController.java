@@ -26,7 +26,7 @@ public class DomaineController {
     private DomaineService domaineService;
     
     
-    @GetMapping(value = "/", produces = "application/json")
+    @GetMapping(produces = "application/json")
     public @ResponseBody List<DomaineDto> getAllDomaine() {
         return domaineService.findAll();
     }
@@ -43,7 +43,7 @@ public class DomaineController {
     }
     
     @GetMapping(value = "/search", produces = { "application/json", "application/xml" })
-    public DomaineDto getTypeContratByName(@RequestParam("name") String name) {
+    public DomaineDto getDomaineByName(@RequestParam("name") String name) {
         return domaineService.findByName(name);
     }
 

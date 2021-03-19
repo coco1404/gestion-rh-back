@@ -16,17 +16,16 @@ public class RoleDto implements Serializable {
 
     @XmlElement
     private long id;
-
+    
     @XmlElement
-    private List<SalarieDto> salaries;
+    private String titre;
 
     public RoleDto() {
     }
 
-    public RoleDto(long id, List<SalarieDto> salaries) {
-        super();
+    public RoleDto(long id, String titre) {
         this.id = id;
-        this.salaries = salaries;
+        this.titre = titre;
     }
 
     public long getId() {
@@ -37,12 +36,11 @@ public class RoleDto implements Serializable {
         this.id = id;
     }
 
-    public List<SalarieDto> getSalaries() {
-        return salaries;
+    public String getTitre() {
+        return titre;
     }
 
-    public void setSalaries(List<SalarieDto> salaries) {
-        this.salaries = salaries;
+    public void setTitre(String titre) {
+        this.titre = titre;
     }
-
 }

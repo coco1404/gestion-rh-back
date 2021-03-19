@@ -41,7 +41,7 @@ public class CompetenceController {
     }
     
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<?> deleteByIdPoste(@PathVariable(value = "id", required = true) long id) {
+    public ResponseEntity<?> deleteById(@PathVariable(value = "id", required = true) long id) {
         try {
             competenceService.deleteById(id);
             return ResponseEntity.status(HttpStatus.ACCEPTED).body("Suppresion effectuée");

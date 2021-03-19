@@ -27,7 +27,7 @@ public class Competence {
     @ManyToMany
     private List<Formation> formations;
     
-    @ManyToMany
+    @ManyToMany(mappedBy = "competencesRequises")
     private List<Poste> postes;
 
     @Version

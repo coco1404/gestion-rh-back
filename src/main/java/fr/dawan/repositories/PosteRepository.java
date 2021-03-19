@@ -23,7 +23,7 @@ public interface PosteRepository extends JpaRepository<Poste, Long>{
     List<Poste> getPosteByLieuTravail(@Param("idLieuTravail") long idLieuTravail);
     
     @Query(" FROM Poste p "
-            + " WHERE p.titrePoste.intitule LIKE :recherche ")
+            + " WHERE p.titrePoste.intitule LIKE %:recherche% ")
     List<Poste> recherchePoste(@Param("recherche") String recherche);//recherche = "/'%"+recherche+"%/'"
     
     @Query(" FROM Poste p "

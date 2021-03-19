@@ -26,7 +26,7 @@ public class AdresseController {
     private AdresseService adresseService;
     
     
-    @GetMapping(value = "/", produces = "application/json")
+    @GetMapping(produces = "application/json")
     public @ResponseBody List<AdresseDto> getAllAdresse() {
         return adresseService.findAll();
     }

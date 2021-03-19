@@ -26,7 +26,7 @@ public class EntretienController {
     private EntretienService entretienService;
     
     
-    @GetMapping(value = "/", produces = "application/json")
+    @GetMapping(produces = "application/json")
     public @ResponseBody List<EntretienDto> getAllEntretiens() {
         return entretienService.findAll();
     }

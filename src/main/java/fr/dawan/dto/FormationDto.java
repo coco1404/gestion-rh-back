@@ -33,25 +33,23 @@ public class FormationDto implements Serializable {
     @XmlElement
     private float prix;
 
-    @XmlElement
-    private List<SalarieDto> salaries;
-
-    @XmlElement
-    private List<CompetenceDto> competences;
+//    @XmlElement
+//    private List<SalarieDto> salaries;
+//
+//    @XmlElement
+//    private List<CompetenceDto> competences;
 
     public FormationDto() {
     }
 
-    public FormationDto(long id, Date dateDebut, Date dateFin, float duree, float prix, List<SalarieDto> salaries,
-            List<CompetenceDto> competences) {
+    public FormationDto(long id, Date dateDebut, Date dateFin, float duree, float prix) {
         super();
         this.id = id;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
         this.duree = duree;
         this.prix = prix;
-        this.salaries = salaries;
-        this.competences = competences;
+
     }
 
     public long getId() {
@@ -94,20 +92,20 @@ public class FormationDto implements Serializable {
         this.prix = prix;
     }
 
-    public List<SalarieDto> getSalaries() {
-        return salaries;
-    }
-
-    public void setSalaries(List<SalarieDto> salaries) {
-        this.salaries = salaries;
-    }
-
-    public List<CompetenceDto> getCompetences() {
-        return competences;
-    }
-
-    public void setCompetences(List<CompetenceDto> competences) {
-        this.competences = competences;
-    }
+//    public List<SalarieDto> getSalaries() {
+//        return salaries;
+//    }
+//
+//    public void setSalaries(List<SalarieDto> salaries) {
+//        this.salaries = salaries;
+//    }
+//
+//    public List<CompetenceDto> getCompetences() {
+//        return competences;
+//    }
+//
+//    public void setCompetences(List<CompetenceDto> competences) {
+//        this.competences = competences;
+//    }
 
 }
