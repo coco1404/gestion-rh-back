@@ -11,9 +11,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.dawan.dto.FormationDto;
+import fr.dawan.dto.SalarieDto;
 import fr.dawan.entities.Formation;
+import fr.dawan.entities.Salarie;
 import fr.dawan.mappers.MapperCommun;
 import fr.dawan.repositories.FormationRepository;
+import fr.dawan.repositories.SalarieRepository;
 
 @Service
 @Transactional
@@ -21,6 +24,9 @@ public class FormationServiceImpl implements FormationService {
 
     @Autowired
     FormationRepository formationRepository;
+    
+    @Autowired
+    SalarieRepository salarieRepository;
     
     @Override
     public List<FormationDto> getAllFormation(int page, int size) {
@@ -90,6 +96,16 @@ public class FormationServiceImpl implements FormationService {
         List<FormationDto> result = new ArrayList<FormationDto>();
         for (Formation c : lst) {
             result.add(MapperCommun.convert(c, FormationDto.class));
+        }
+        return result;
+    }
+
+    @Override
+    public List<SalarieDto> getSalarieByIdFormation(long idFormation) {
+        List<Salarie> lst = salarieRepository.getSalarieByIdFormation(idFormation);
+        List<SalarieDto> result = new ArrayList<SalarieDto>();
+        for (Salarie c : lst) {
+            result.add(MapperCommun.convert(c, SalarieDto.class));
         }
         return result;
     }

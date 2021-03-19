@@ -22,6 +22,11 @@ public interface SalarieRepository extends JpaRepository<Salarie, Long> {
     @Query("FROM Salarie salarie"
             + " JOIN Poste poste ON salarie.id = poste.salarie.id"
             + " WHERE poste.salarie.id = :id")
-    List<Salarie> findAllSalariesByPoste(@Param("id")long id);
+    List<Salarie> findAllSalariesByPoste(@Param("id") long id);
+    
+    @Query("FROM Salarie s"
+            + " JOIN s.formations f"
+            + " WHERE f.id = :idFormation")
+    List<Salarie> getSalarieByIdFormation(@Param("idFormation") long idFormation);
     
 }

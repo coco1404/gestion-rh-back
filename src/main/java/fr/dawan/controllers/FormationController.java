@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.dawan.dto.FormationDto;
+import fr.dawan.dto.SalarieDto;
 import fr.dawan.services.FormationService;
 
 @RestController
@@ -54,6 +55,11 @@ public class FormationController {
     @GetMapping(value = "/periode", produces = "application/json")
     public List<FormationDto> getAllFormationByPeriode(@RequestParam(value = "dateDebut", required = true) Date dateDebut, @RequestParam(value = "dateFin", required = true) Date dateFin) {
         return formationService.getAllFormationByPeriode(dateDebut, dateFin);
+    }
+    
+    @GetMapping(value = "/{idFormation}/salaries", produces = "application/json")
+    public List<SalarieDto> getSalarieByIdFormation(@PathVariable("idFormation") int idFormation) {
+        return formationService.getSalarieByIdFormation(idFormation);
     }
     
     @PostMapping(consumes = "application/json", produces = "application/json")
