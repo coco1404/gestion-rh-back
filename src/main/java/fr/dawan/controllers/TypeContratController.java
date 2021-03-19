@@ -16,52 +16,52 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.dawan.dto.DomaineDto;
-import fr.dawan.services.DomaineService;
+import fr.dawan.dto.TypeContratDto;
+import fr.dawan.services.TypeContratService;
 
 @RestController
-@RequestMapping("/api/domaines")
-public class DomaineController {
+@RequestMapping("/api/typecontrats")
+public class TypeContratController {
     @Autowired
-    private DomaineService domaineService;
+    private TypeContratService typeContratService;
     
     
     @GetMapping(value = "/", produces = "application/json")
-    public @ResponseBody List<DomaineDto> getAllAdresse() {
-        return domaineService.findAll();
+    public @ResponseBody List<TypeContratDto> getAllTypeContrat() {
+        return typeContratService.findAll();
     }
     
     @GetMapping(value = "/{page}/{size}", produces = "application/json")
-    public @ResponseBody List<DomaineDto> getAllAdresseByPage(@PathVariable("page") int page,
+    public @ResponseBody List<TypeContratDto> getAllTypeContratByPage(@PathVariable("page") int page,
             @PathVariable(value = "size") int size) {
-        return domaineService.getAllDomaines(page, size);
+        return typeContratService.getAllTypeContracts(page, size);
     }
     
     @GetMapping(value = "/{id}", produces = { "application/json", "application/xml" })
-    public DomaineDto getAdresseById(@PathVariable("id") long id) {
-        return domaineService.getById(id);// status = ok, body (objet retourné)
+    public TypeContratDto getTypeContratById(@PathVariable("id") long id) {
+        return typeContratService.findById(id);// status = ok, body (objet retourné)
     }
     
     @GetMapping(value = "/search", produces = { "application/json", "application/xml" })
-    public DomaineDto getTypeContratByName(@RequestParam("name") String name) {
-        return domaineService.findByName(name);
+    public TypeContratDto getTypeContratByName(@RequestParam("name") String name) {
+        return typeContratService.findByName(name);
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public DomaineDto saveAdresse(@RequestBody DomaineDto dDto) {
-        return domaineService.saveOrUpdate(dDto);
+    public TypeContratDto saveTypeContrat(@RequestBody TypeContratDto tcDto) {
+        return typeContratService.saveOrUpdate(tcDto);
     }
     
     @PutMapping(consumes = "application/json", produces = "application/json")
-    public DomaineDto updateAdresse(@RequestBody DomaineDto dDto) {
-        return domaineService.saveOrUpdate(dDto);
+    public TypeContratDto updateTypeContrat(@RequestBody TypeContratDto tcDto) {
+        return typeContratService.saveOrUpdate(tcDto);
     }
 
     
     @DeleteMapping(value = "/{id}", produces = "text/plain")
-    public ResponseEntity<?> deleteById(@PathVariable(value = "id") long id) {
+    public ResponseEntity<?> deleteTypeContratById(@PathVariable(value = "id") long id) {
         try {
-            domaineService.deleteById(id);
+            typeContratService.deleteById(id);
             return ResponseEntity.status(HttpStatus.OK).body("Suppr effectuée");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Suppr non réalisée");
