@@ -3,9 +3,6 @@ package fr.dawan.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,7 +25,7 @@ public class SalarieController {
     @Autowired
     private SalarieService salarieService;
     
-    @GetMapping(value = "/", produces = "application/json")
+    @GetMapping(produces = "application/json")
     public @ResponseBody List<SalarieDto> getAllSalaries() {
         return salarieService.findAll();
     }
@@ -56,11 +53,11 @@ public class SalarieController {
     
     @GetMapping(value = "/poste/{id}", produces = "application/json")
     public @ResponseBody List<SalarieDto> getSalariesByPoste(@PathVariable("id") long id) {
-        return salarieService.findAllSalariesByPoste(id);
+        return salarieService.findAllSalariesByTitrePoste(id);
     }
     
     @GetMapping(value = "/{id}", produces = { "application/json", "application/xml" })
-    public SalarieDto getEntretieSalarieById(@PathVariable("id") long id) {
+    public SalarieDto getSalarieById(@PathVariable("id") long id) {
         return salarieService.findById(id);
     }
     
@@ -89,14 +86,4 @@ public class SalarieController {
         return salarieService.saveOrUpdate(salarieDto);
     }
 
-    
-    @DeleteMapping(value = "/{id}", produces = "text/plain")
-    public ResponseEntity<?> deleteById(@PathVariable(value = "id") long id) {
-        try {
-            salarieService.deleteById(id);
-            return ResponseEntity.status(HttpStatus.OK).body("Suppr effectuée");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Suppr non réalisée");
-        }
-    }
 }

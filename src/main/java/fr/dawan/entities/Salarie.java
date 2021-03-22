@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -30,7 +31,7 @@ public class Salarie {
     @Column(nullable = false, length = 255)
     private String prenom;
     
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false, length = 255,unique = true)
     private String email;
 
     @Column(nullable = false, length = 255)
@@ -60,10 +61,20 @@ public class Salarie {
     @JoinColumn(nullable = false)
     private Domaine domaine;
 
-    @ManyToMany(mappedBy = "salaries")
+    @ManyToMany
+    @JoinTable(
+            name="salarie_role",
+            joinColumns=
+            @JoinColumn( name="salarie_id", referencedColumnName="id"),
+            inverseJoinColumns=@JoinColumn(name="role_id", referencedColumnName="id"))
     private List<Role> roles;
 
-    @ManyToMany(mappedBy = "salaries")
+    @ManyToMany
+    @JoinTable(
+            name="salarie_competence",
+            joinColumns=
+            @JoinColumn( name="salarie_id", referencedColumnName="id"),
+            inverseJoinColumns=@JoinColumn(name="competence_id", referencedColumnName="id"))
     private List<Competence> competences;
 
     @Column(nullable = false)

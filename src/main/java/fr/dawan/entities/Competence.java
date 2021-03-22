@@ -21,10 +21,10 @@ public class Competence {
     @Column(nullable = false, length = 255)
     private String nom;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "competences")
     private List<Salarie> salaries;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "competences")
     private List<Formation> formations;
     
     @ManyToMany(mappedBy = "competencesRequises")

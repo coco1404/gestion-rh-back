@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -39,9 +41,19 @@ public class Formation {
     private float prix;
 
     @ManyToMany
+    @JoinTable(
+            name="formation_salarie",
+            joinColumns=
+            @JoinColumn( name="formation_id", referencedColumnName="id"),
+            inverseJoinColumns=@JoinColumn(name="salarie_id", referencedColumnName="id"))
     private List<Salarie> salaries;
 
-    @ManyToMany(mappedBy = "formations")
+    @ManyToMany
+    @JoinTable(
+            name="formation_competence",
+            joinColumns=
+            @JoinColumn( name="formation_id", referencedColumnName="id"),
+            inverseJoinColumns=@JoinColumn(name="competence_id", referencedColumnName="id"))
     private List<Competence> competences;
 
     @Version

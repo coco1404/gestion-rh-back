@@ -91,8 +91,8 @@ public class SalarieServiceImpl implements SalarieService{
     }
 
     @Override
-    public List<SalarieDto> findAllSalariesByPoste(long id) {
-        List<Salarie> lst = salarieRepository.findAllSalariesByPoste(id);
+    public List<SalarieDto> findAllSalariesByTitrePoste(long id) {
+        List<Salarie> lst = salarieRepository.findAllSalariesByTitrePoste(id);
         List<SalarieDto> result = new ArrayList<SalarieDto>();
         for(Salarie salarie : lst) {
          result.add(MapperCommun.convert(salarie, SalarieDto.class));
@@ -107,11 +107,6 @@ public class SalarieServiceImpl implements SalarieService{
             return MapperCommun.convert(salarie.get(), SalarieDto.class);
         }
         return null;
-    }
-
-    @Override
-    public void deleteById(long id) {
-        salarieRepository.deleteById(id);
     }
 
     @Override

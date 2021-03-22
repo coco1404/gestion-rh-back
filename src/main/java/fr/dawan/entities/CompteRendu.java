@@ -19,7 +19,7 @@ public class CompteRendu {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false,columnDefinition = "LONGTEXT")
     private String compteRendu;
 
     @Column(nullable = false)

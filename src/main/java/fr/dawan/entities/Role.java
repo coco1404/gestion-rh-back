@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
@@ -22,8 +21,7 @@ public class Role {
     @Column(nullable = false, length = 150)
     private String titre;
 
-    @ManyToMany
-    @JoinColumn(nullable = false)
+    @ManyToMany(mappedBy = "roles")
     private List<Salarie> salaries;
 
     @Version

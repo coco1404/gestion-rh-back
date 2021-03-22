@@ -3,7 +3,6 @@ package fr.dawan.entities;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -64,7 +63,7 @@ public class Poste {
 
     @ManyToMany
     @JoinTable(
-        name="poste_roles",
+        name="poste_competence",
         joinColumns=
         @JoinColumn( name="poste_id", referencedColumnName="id"),
         inverseJoinColumns=@JoinColumn(name="competence_id", referencedColumnName="id"))

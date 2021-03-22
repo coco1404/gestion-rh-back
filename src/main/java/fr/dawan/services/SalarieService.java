@@ -13,9 +13,8 @@ public interface SalarieService {
     List<SalarieDto> findAllSalariesByAdresse(long id);
     List<SalarieDto> findAllSalariesByDomaine(long id);
     List<SalarieDto> findAllSalariesByEntreprise(long id);
-    List<SalarieDto> findAllSalariesByPoste(long id);
+    List<SalarieDto> findAllSalariesByTitrePoste(long id);
     SalarieDto findById(long id);
-    void deleteById(long id);
     SalarieDto saveOrUpdate(SalarieDto salarieDto);
     List<FormationDto> findFormationBySalarie(long id);
     List<RoleDto> findRoleBySalarie(long id);

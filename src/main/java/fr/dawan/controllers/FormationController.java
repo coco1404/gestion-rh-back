@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import fr.dawan.dto.CreateFormationDto;
 import fr.dawan.dto.FormationDto;
 import fr.dawan.dto.SalarieDto;
 import fr.dawan.services.FormationService;
@@ -64,12 +65,12 @@ public class FormationController {
     }
     
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public FormationDto saveFormation(@RequestBody FormationDto fDto) {
+    public CreateFormationDto saveFormation(@RequestBody CreateFormationDto fDto) {
         return formationService.saveOrUpdate(fDto);
     }
 
     @PutMapping(consumes = "application/json", produces = "application/json")
-    public FormationDto updateFormation(@RequestBody FormationDto fDto) {
+    public CreateFormationDto updateFormation(@RequestBody CreateFormationDto fDto) {
         return formationService.saveOrUpdate(fDto);
     }
     

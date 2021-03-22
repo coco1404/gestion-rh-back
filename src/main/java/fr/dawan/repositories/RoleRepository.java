@@ -12,7 +12,7 @@ public interface RoleRepository extends JpaRepository<Role, Long> {
     @Query("FROM Role role WHERE role.titre= :name")
     Role findByName(@Param("name")String name);
     
-    @Query("FROM Role role JOIN role.salaries rs WHERE rs.id= :id")
+    @Query("FROM Role role JOIN FETCH role.salaries rs WHERE rs.id= :id")
     List<Role> findRoleBySalarie(@Param("id")long id);
     
 }

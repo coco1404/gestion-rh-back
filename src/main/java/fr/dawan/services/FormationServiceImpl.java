@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import fr.dawan.dto.CreateFormationDto;
 import fr.dawan.dto.FormationDto;
 import fr.dawan.dto.SalarieDto;
 import fr.dawan.entities.Formation;
@@ -84,10 +85,10 @@ public class FormationServiceImpl implements FormationService {
     }
 
     @Override
-    public FormationDto saveOrUpdate(FormationDto formationDto) {
+    public CreateFormationDto saveOrUpdate(CreateFormationDto formationDto) {
         Formation f = MapperCommun.convert(formationDto, Formation.class);
         f = formationRepository.saveAndFlush(f);
-        return MapperCommun.convert(f, FormationDto.class);
+        return MapperCommun.convert(f, CreateFormationDto.class);
     }
 
     @Override
