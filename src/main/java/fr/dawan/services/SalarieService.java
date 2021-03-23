@@ -15,6 +15,7 @@ public interface SalarieService {
     List<SalarieDto> findAllSalariesByEntreprise(long id);
     List<SalarieDto> findAllSalariesByTitrePoste(long id);
     SalarieDto findById(long id);
+    SalarieDto findByEmail(String email);
     SalarieDto saveOrUpdate(SalarieDto salarieDto);
     List<FormationDto> findFormationBySalarie(long id);
     List<RoleDto> findRoleBySalarie(long id);

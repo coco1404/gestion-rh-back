@@ -28,4 +28,7 @@ public interface SalarieRepository extends JpaRepository<Salarie, Long> {
     @Query("FROM Salarie s JOIN FETCH s.formations f WHERE f.id = :idFormation")
     List<Salarie> getSalarieByIdFormation(@Param("idFormation") long idFormation);
     
+    @Query("FROM Salarie s WHERE s.email = :email")
+    Salarie findByEmail(@Param("email") String email);
+    
 }

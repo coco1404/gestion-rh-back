@@ -145,6 +145,15 @@ public class SalarieServiceImpl implements SalarieService{
         }
         return result;
     }
+
+    @Override
+    public SalarieDto findByEmail(String email) {
+        Salarie s = salarieRepository.findByEmail(email);
+        if(s!=null)
+            return MapperCommun.convert(s, SalarieDto.class);
+        
+        return null;
+    }
     
     
 
