@@ -28,9 +28,13 @@ public class GestionRhBackApplication {
             // CROSS ORIGIN
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                // registry.addMapping("/api/contacts").allowedMethods("GET").allowedOrigins("*");
+                //registry.addMapping("/api/salaries").allowedMethods("GET").allowedOrigins("*");
+                //registry.addMapping("/api/authenticate").allowedMethods("POST").allowedOrigins("*");
                 // registry.addMapping("/api/contacts").allowedMethods("POST","PUT").allowedOrigins("jehann.fr");
-                registry.addMapping("/**").allowedOrigins("http://localhost:3000");
+                registry.addMapping("/**").allowedOrigins("*").allowedMethods("*")
+                .allowedHeaders("*")
+                .exposedHeaders("Content-Type", "Access-Control-Allow-Origin", "Access-Control-Allow-Headers", "Origin", "Authorization", "X-Requested-With", "requestId", "Correlation-Id")
+                .allowCredentials(true).maxAge(3600);
             }
 
 //             CONVERTERS

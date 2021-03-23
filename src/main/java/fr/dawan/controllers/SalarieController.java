@@ -18,7 +18,7 @@ import fr.dawan.dto.FormationDto;
 import fr.dawan.dto.RoleDto;
 import fr.dawan.dto.SalarieDto;
 import fr.dawan.services.SalarieService;
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/salaries")
 public class SalarieController {
