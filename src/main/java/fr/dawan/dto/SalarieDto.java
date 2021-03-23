@@ -59,7 +59,8 @@ public class SalarieDto implements Serializable {
 
     @XmlElement
     private boolean siManager;
-
+    
+    @XmlElement
     private EntrepriseDto entreprise;
 
     @XmlElement

@@ -17,6 +17,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
+import org.springframework.beans.factory.annotation.Value;
+
 //pb de génération des tables avec el @manytoone : poste, typeContrat, manager
 
 @Entity
@@ -46,9 +48,11 @@ public class Poste {
     private Date dateFin;
 
     @Column(precision = 2)
+    @Value("${some.key:0}")
     private float volumeHoraire;
 
     @Column(precision = 2)
+    @Value("${some.key:0}")
     private float volumeJournalier;
 
     @ManyToOne

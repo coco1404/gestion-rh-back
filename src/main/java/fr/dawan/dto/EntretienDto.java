@@ -24,16 +24,16 @@ public class EntretienDto implements Serializable {
     private CompteRenduDto compteRendu;
 
     @XmlElement
-    private SalarieDto salarie;
+    private SalarieEntretienDto salarie;
     
     @XmlElement
-    private SalarieDto managerEntretien;
+    private SalarieEntretienDto managerEntretien;
 
     public EntretienDto() {
     }
 
-    public EntretienDto(long id, Date dateEntretien, CompteRenduDto compteRendu, SalarieDto salarie,
-            SalarieDto managerEntretien) {
+    public EntretienDto(long id, Date dateEntretien, CompteRenduDto compteRendu, SalarieEntretienDto salarie,
+            SalarieEntretienDto managerEntretien) {
         this.id = id;
         this.dateEntretien = dateEntretien;
         this.compteRendu = compteRendu;
@@ -65,19 +65,19 @@ public class EntretienDto implements Serializable {
         this.compteRendu = compteRendu;
     }
 
-    public SalarieDto getSalarie() {
+    public SalarieEntretienDto getSalarie() {
         return salarie;
     }
 
-    public void setSalarie(SalarieDto salarie) {
+    public void setSalarie(SalarieEntretienDto salarie) {
         this.salarie = salarie;
     }
 
-    public SalarieDto getManagerEntretien() {
+    public SalarieEntretienDto getManagerEntretien() {
         return managerEntretien;
     }
 
-    public void setManagerEntretien(SalarieDto managerEntretien) {
+    public void setManagerEntretien(SalarieEntretienDto managerEntretien) {
         this.managerEntretien = managerEntretien;
     }
 

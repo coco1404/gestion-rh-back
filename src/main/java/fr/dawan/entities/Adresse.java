@@ -19,10 +19,13 @@ public class Adresse {
     private String numero;
 
     @Column(nullable = false, length = 255)
-    private String rue;
+    private String voie;
 
     @Column(nullable = false, length = 255)
     private String ville;
+
+    @Column(length = 255)
+    private String complementAdresse;
 
     @Column(nullable = false, length = 255)
     private String codePostal;
@@ -34,17 +37,6 @@ public class Adresse {
     private int version;
 
     public Adresse() {
-    }
-
-    public Adresse(long id, String numero, String rue, String ville, String codePostal, int version, String pays) {
-        super();
-        this.id = id;
-        this.numero = numero;
-        this.rue = rue;
-        this.ville = ville;
-        this.codePostal = codePostal;
-        this.version = version;
-        this.pays = pays;
     }
 
     public long getId() {
@@ -63,12 +55,12 @@ public class Adresse {
         this.numero = numero;
     }
 
-    public String getRue() {
-        return rue;
+    public String getVoie() {
+        return voie;
     }
 
-    public void setRue(String rue) {
-        this.rue = rue;
+    public void setVoie(String voie) {
+        this.voie = voie;
     }
 
     public String getVille() {
@@ -77,6 +69,14 @@ public class Adresse {
 
     public void setVille(String ville) {
         this.ville = ville;
+    }
+
+    public String getComplementAdresse() {
+        return complementAdresse;
+    }
+
+    public void setComplementAdresse(String complementAdresse) {
+        this.complementAdresse = complementAdresse;
     }
 
     public String getCodePostal() {

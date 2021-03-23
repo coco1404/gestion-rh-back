@@ -8,6 +8,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import fr.dawan.entities.Domaine;
+
 @XmlRootElement(name = "formations")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class FormationDto implements Serializable {
@@ -38,17 +40,20 @@ public class FormationDto implements Serializable {
 //    @XmlElement
 //    private List<CompetenceDto> competences;
 
+    @XmlElement
+    private Domaine domaine;
+
     public FormationDto() {
     }
 
-    public FormationDto(long id, Date dateDebut, Date dateFin, float duree, float prix) {
+    public FormationDto(long id, Date dateDebut, Date dateFin, float duree, float prix, Domaine domaine) {
         super();
         this.id = id;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
         this.duree = duree;
         this.prix = prix;
-
+        this.domaine = domaine;
     }
 
     public long getId() {
@@ -89,6 +94,14 @@ public class FormationDto implements Serializable {
 
     public void setPrix(float prix) {
         this.prix = prix;
+    }
+
+    public Domaine getDomaine() {
+        return domaine;
+    }
+
+    public void setDomaine(Domaine domaine) {
+        this.domaine = domaine;
     }
 
 //    public List<SalarieDto> getSalaries() {

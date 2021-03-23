@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,6 +24,9 @@ public class Formation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(nullable = false, length = 255)
+    private String titre;
+
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dateDebut;
@@ -30,7 +34,7 @@ public class Formation {
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dateFin;
-    
+
     /**
      * durée en heure
      */
@@ -41,20 +45,16 @@ public class Formation {
     private float prix;
 
     @ManyToMany
-    @JoinTable(
-            name="formation_salarie",
-            joinColumns=
-            @JoinColumn( name="formation_id", referencedColumnName="id"),
-            inverseJoinColumns=@JoinColumn(name="salarie_id", referencedColumnName="id"))
+    @JoinTable(name = "formation_salarie", joinColumns = @JoinColumn(name = "formation_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "salarie_id", referencedColumnName = "id"))
     private List<Salarie> salaries;
 
     @ManyToMany
-    @JoinTable(
-            name="formation_competence",
-            joinColumns=
-            @JoinColumn( name="formation_id", referencedColumnName="id"),
-            inverseJoinColumns=@JoinColumn(name="competence_id", referencedColumnName="id"))
+    @JoinTable(name = "formation_competence", joinColumns = @JoinColumn(name = "formation_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "competence_id", referencedColumnName = "id"))
     private List<Competence> competences;
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Domaine domaine;
 
     @Version
     private int version;
@@ -68,6 +68,14 @@ public class Formation {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getTitre() {
+        return titre;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
     }
 
     public Date getDateDebut() {
@@ -85,16 +93,16 @@ public class Formation {
     public void setDateFin(Date dateFin) {
         this.dateFin = dateFin;
     }
-    
+
     /**
-     * @return durée en heure
+     * @return en heure
      */
     public float getDuree() {
         return duree;
     }
-    
+
     /**
-     * @param duree heure
+     * @param duree en heure
      */
     public void setDuree(float duree) {
         this.duree = duree;
@@ -122,6 +130,14 @@ public class Formation {
 
     public void setCompetences(List<Competence> competences) {
         this.competences = competences;
+    }
+
+    public Domaine getDomaine() {
+        return domaine;
+    }
+
+    public void setDomaine(Domaine domaine) {
+        this.domaine = domaine;
     }
 
     public int getVersion() {
