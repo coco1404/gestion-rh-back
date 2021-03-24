@@ -14,13 +14,16 @@ import fr.dawan.dto.CompetenceDto;
 import fr.dawan.dto.FormationDto;
 import fr.dawan.dto.RoleDto;
 import fr.dawan.dto.SalarieDto;
+import fr.dawan.dto.SalarieListeDto;
 import fr.dawan.entities.Competence;
 import fr.dawan.entities.Formation;
+import fr.dawan.entities.Poste;
 import fr.dawan.entities.Role;
 import fr.dawan.entities.Salarie;
 import fr.dawan.mappers.MapperCommun;
 import fr.dawan.repositories.CompetenceRepository;
 import fr.dawan.repositories.FormationRepository;
+import fr.dawan.repositories.PosteRepository;
 import fr.dawan.repositories.RoleRepository;
 import fr.dawan.repositories.SalarieRepository;
 
@@ -39,6 +42,9 @@ public class SalarieServiceImpl implements SalarieService{
     
     @Autowired
     private RoleRepository roleRepository;
+    
+    @Autowired
+    private PosteRepository posteRepository;
     
     @Override
     public List<SalarieDto> findAll() {
@@ -153,6 +159,16 @@ public class SalarieServiceImpl implements SalarieService{
             return MapperCommun.convert(s, SalarieDto.class);
         
         return null;
+    }
+
+    @Override
+    public List<SalarieListeDto> getAllSalariesWithPosteByPage(int page, int size) {
+        List<Poste> lst = posteRepository.getAllSalariesWithPosteByPage(PageRequest.of(page, size));
+        List<SalarieListeDto> result = new ArrayList<SalarieListeDto>();
+        for(Poste competence : lst) {
+         result.add(MapperCommun.convert(competence, SalarieListeDto.class));
+        }
+        return result;
     }
     
     

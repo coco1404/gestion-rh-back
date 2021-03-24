@@ -3,7 +3,6 @@ package fr.dawan.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,8 +16,9 @@ import fr.dawan.dto.CompetenceDto;
 import fr.dawan.dto.FormationDto;
 import fr.dawan.dto.RoleDto;
 import fr.dawan.dto.SalarieDto;
+import fr.dawan.dto.SalarieListeDto;
 import fr.dawan.services.SalarieService;
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+
 @RestController
 @RequestMapping("/api/salaries")
 public class SalarieController {
@@ -85,6 +85,12 @@ public class SalarieController {
     @PutMapping(consumes = "application/json", produces = "application/json")
     public SalarieDto updateSalarie(@RequestBody SalarieDto salarieDto) {
         return salarieService.saveOrUpdate(salarieDto);
+    }
+    
+    @GetMapping(value = "/Liste/{page}/{size}", produces = "application/json")
+    public @ResponseBody List<SalarieListeDto> getAllSalariesWithPosteByPage(@PathVariable("page") int page,
+            @PathVariable(value = "size") int size) {
+        return salarieService.getAllSalariesWithPosteByPage(page, size);
     }
 
 }

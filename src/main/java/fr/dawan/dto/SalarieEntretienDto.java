@@ -33,16 +33,13 @@ public class SalarieEntretienDto implements Serializable {
     private List<RoleDto> roles;
 
     @XmlElement
-    private List<CompetenceDto> competences;
-
-    @XmlElement
     private EntrepriseDto entreprise;
 
     public SalarieEntretienDto() {
     }
 
     public SalarieEntretienDto(long id, String nom, String prenom, String email, DomaineDto domaine,
-            List<RoleDto> roles, List<CompetenceDto> competences, EntrepriseDto entreprise) {
+            List<RoleDto> roles, EntrepriseDto entreprise) {
         super();
         this.id = id;
         this.nom = nom;
@@ -50,7 +47,6 @@ public class SalarieEntretienDto implements Serializable {
         this.email = email;
         this.domaine = domaine;
         this.roles = roles;
-        this.competences = competences;
         this.entreprise = entreprise;
     }
 
@@ -100,14 +96,6 @@ public class SalarieEntretienDto implements Serializable {
 
     public void setRoles(List<RoleDto> roles) {
         this.roles = roles;
-    }
-
-    public List<CompetenceDto> getCompetences() {
-        return competences;
-    }
-
-    public void setCompetences(List<CompetenceDto> competences) {
-        this.competences = competences;
     }
 
     public EntrepriseDto getEntreprise() {

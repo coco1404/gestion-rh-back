@@ -3,6 +3,7 @@ package fr.dawan.repositories;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -30,4 +31,9 @@ public interface PosteRepository extends JpaRepository<Poste, Long>{
             + " WHERE p.dateDebut BETWEEN :dateDebut and :dateFin "
             + " OR p.dateFin BETWEEN :dateDebut and :dateFin ")
     List<Poste> recherchePoste(@Param("dateDebut") Date dateDebut, @Param("dateFin") Date dateFin);
+    
+    @Query(" FROM Poste p "
+            + " WHERE (p.dateFin > CURRENT_DATE OR p.dateFin IS NULL)"
+            + " AND p.salarie.id IS NOT NULL ")
+    List<Poste> getAllSalariesWithPosteByPage(PageRequest pageRequest);
 }
