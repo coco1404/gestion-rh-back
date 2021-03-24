@@ -12,21 +12,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class LoginResponseDto implements Serializable{
 
     private String token;
-    private Object subObject;
+    private SalarieDto salarie;
 
     public LoginResponseDto() {
         
     }
-    
     
     public LoginResponseDto(String token) {
         super();
         this.token = token;
     }
 
-    public LoginResponseDto(String token, Object subObject) {
+    public LoginResponseDto(String token, SalarieDto salarie) {
         this.token = token;
-        this.subObject = subObject;
+        this.salarie = salarie;
     }
 
 
@@ -39,15 +38,14 @@ public class LoginResponseDto implements Serializable{
     }
 
 
-    public Object getSubObject() {
-        return subObject;
+    public SalarieDto getSalarie() {
+        return salarie;
     }
 
 
-    public void setSubObject(Object subObject) {
-        this.subObject = subObject;
+    public void setSalarie(SalarieDto salarie) {
+        this.salarie = salarie;
     }
-      
     
     
 }
