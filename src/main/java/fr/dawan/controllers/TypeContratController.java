@@ -43,7 +43,7 @@ public class TypeContratController {
     }
     
     @GetMapping(value = "/search", produces = { "application/json", "application/xml" })
-    public TypeContratDto getTypeContratByName(@RequestParam("name") String name) {
+    public List<TypeContratDto> getTypeContratByName(@RequestParam("name") String name) {
         return typeContratService.findByName(name);
     }
 

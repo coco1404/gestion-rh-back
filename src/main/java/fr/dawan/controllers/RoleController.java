@@ -43,7 +43,7 @@ public class RoleController {
     }
     
     @GetMapping(value = "/search", produces = { "application/json", "application/xml" })
-    public RoleDto getRoleByName(@RequestParam("name") String name) {
+    public List<RoleDto> getRoleByName(@RequestParam("name") String name) {
         return roleService.findByName(name);
     }
     

@@ -43,7 +43,7 @@ public class EntrepriseController {
     }
     
     @GetMapping(value = "/search", produces = { "application/json", "application/xml" })
-    public EntrepriseDto getEntrepriseByName(@RequestParam("name") String name) {
+    public List<EntrepriseDto> getEntrepriseByName(@RequestParam("name") String name) {
         return entrepriseService.findByName(name);
     }
     @GetMapping(value = "/adresse/{id}", produces = { "application/json", "application/xml" })

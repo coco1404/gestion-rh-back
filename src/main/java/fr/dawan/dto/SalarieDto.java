@@ -9,14 +9,15 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @XmlRootElement(name = "salaries")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SalarieDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @XmlElement
     private long id;
 
@@ -25,11 +26,11 @@ public class SalarieDto implements Serializable {
 
     @XmlElement
     private String prenom;
-    
+
     @XmlElement
     private String email;
-    
-    @JsonIgnore
+
+    @JsonProperty(access = Access.WRITE_ONLY)
     private String motDePasse;
 
     @XmlElement
@@ -61,12 +62,15 @@ public class SalarieDto implements Serializable {
 
     @XmlElement
     private boolean siManager;
-    
+
     @XmlElement
     private EntrepriseDto entreprise;
 
     @XmlElement
     private List<FormationDto> formations;
+
+    @XmlElement
+    private List<PosteDto> postes;
 
     public SalarieDto() {
     }
@@ -74,7 +78,8 @@ public class SalarieDto implements Serializable {
     public SalarieDto(long id, String nom, String prenom, String email, String motDePasse, String telPersonnel,
             String mobilPersonnel, AdresseDto adresse, Date dateNaissance, String telProfessionnel,
             String mobileProfessionnel, DomaineDto domaine, List<RoleDto> roles, List<CompetenceDto> competences,
-            boolean siManager, EntrepriseDto entreprise, List<FormationDto> formations) {
+            boolean siManager, EntrepriseDto entreprise, List<FormationDto> formations, List<PosteDto> postes) {
+        super();
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -92,6 +97,7 @@ public class SalarieDto implements Serializable {
         this.siManager = siManager;
         this.entreprise = entreprise;
         this.formations = formations;
+        this.postes = postes;
     }
 
     public long getId() {
@@ -125,7 +131,7 @@ public class SalarieDto implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-
+    
     public String getMotDePasse() {
         return motDePasse;
     }
@@ -229,7 +235,13 @@ public class SalarieDto implements Serializable {
     public void setFormations(List<FormationDto> formations) {
         this.formations = formations;
     }
-    
-    
+
+    public List<PosteDto> getPostes() {
+        return postes;
+    }
+
+    public void setPostes(List<PosteDto> postes) {
+        this.postes = postes;
+    }
 
 }

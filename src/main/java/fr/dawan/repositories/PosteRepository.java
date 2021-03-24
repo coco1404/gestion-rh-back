@@ -24,16 +24,18 @@ public interface PosteRepository extends JpaRepository<Poste, Long>{
     List<Poste> getPosteByLieuTravail(@Param("idLieuTravail") long idLieuTravail);
     
     @Query(" FROM Poste p "
-            + " WHERE p.titrePoste.intitule LIKE %:recherche% ")
-    List<Poste> recherchePoste(@Param("recherche") String recherche);//recherche = "/'%"+recherche+"%/'"
+            + " WHERE LOWER(p.titrePoste.intitule) LIKE %:recherche% ")
+    List<Poste> recherchePoste(@Param("recherche") String recherche);
     
     @Query(" FROM Poste p "
             + " WHERE p.dateDebut BETWEEN :dateDebut and :dateFin "
             + " OR p.dateFin BETWEEN :dateDebut and :dateFin ")
     List<Poste> recherchePoste(@Param("dateDebut") Date dateDebut, @Param("dateFin") Date dateFin);
     
-    @Query(" FROM Poste p "
+    /*@Query(" FROM Poste p "
             + " WHERE (p.dateFin > CURRENT_DATE OR p.dateFin IS NULL)"
-            + " AND p.salarie.id IS NOT NULL ")
+            + " AND p.salarie.id IS NOT NULL ")*/
+    @Query(" FROM Poste p "
+            + " ORDER BY p.salarie.id ASC, p.dateFin DESC ")
     List<Poste> getAllSalariesWithPosteByPage(PageRequest pageRequest);
 }

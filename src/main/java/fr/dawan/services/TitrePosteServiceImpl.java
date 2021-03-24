@@ -43,12 +43,13 @@ public class TitrePosteServiceImpl implements TitrePosteService{
     }
 
     @Override
-    public TitrePosteDto findByName(String name) {
-        TitrePoste tp = titrePosteRepository.findByName(name);
-        if(tp != null) {
-            return MapperCommun.convert(tp, TitrePosteDto.class);
+    public List<TitrePosteDto> findByName(String name) {
+        List<TitrePoste> lst = titrePosteRepository.findByName(name.toLowerCase());
+        List<TitrePosteDto> result = new ArrayList<TitrePosteDto>();
+        for(TitrePoste tp : lst) {
+         result.add(MapperCommun.convert(tp, TitrePosteDto.class));
         }
-        return null;
+        return result; 
     }
 
     @Override

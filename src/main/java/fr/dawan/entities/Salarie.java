@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,10 +13,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "salaries")
@@ -42,6 +46,10 @@ public class Salarie {
 
     @Column(length = 50)
     private String mobilPersonnel;
+    
+    @OneToMany(mappedBy = "salarie", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Poste> postes;
 
     @ManyToOne
     @JoinColumn(nullable = false)
@@ -236,4 +244,14 @@ public class Salarie {
     public void setVersion(int version) {
         this.version = version;
     }
+    
+    public List<Poste> getPostes() {
+        return postes;
+    }
+    
+    public void setPostes(List<Poste> postes) {
+        this.postes = postes;
+    }
+    
+    
 }

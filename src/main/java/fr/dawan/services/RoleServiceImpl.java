@@ -43,12 +43,13 @@ public class RoleServiceImpl implements RoleService{
     }
 
     @Override
-    public RoleDto findByName(String name) {
-        Role role = roleRepository.findByName(name);
-        if(role != null) {
-            return MapperCommun.convert(role, RoleDto.class);
+    public List<RoleDto> findByName(String name) {
+        List<Role> lst = roleRepository.findByName(name.toLowerCase());
+        List<RoleDto> result = new ArrayList<RoleDto>();
+        for(Role role : lst) {
+         result.add(MapperCommun.convert(role, RoleDto.class));
         }
-        return null;
+        return result; 
     }
 
     @Override

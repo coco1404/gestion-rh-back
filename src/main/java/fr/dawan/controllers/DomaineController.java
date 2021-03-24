@@ -43,7 +43,7 @@ public class DomaineController {
     }
     
     @GetMapping(value = "/search", produces = { "application/json", "application/xml" })
-    public DomaineDto getDomaineByName(@RequestParam("name") String name) {
+    public List<DomaineDto> getDomaineByName(@RequestParam("name") String name) {
         return domaineService.findByName(name);
     }
 

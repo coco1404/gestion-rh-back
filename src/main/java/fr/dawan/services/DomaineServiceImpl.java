@@ -52,12 +52,13 @@ public class DomaineServiceImpl implements DomaineService{
     }
     
     @Override
-    public DomaineDto findByName(String name) {
-        Domaine domaine = domaineRepository.findByName(name);
-        if(domaine != null) {
-            return MapperCommun.convert(domaine, DomaineDto.class);
+    public List<DomaineDto> findByName(String name) {
+        List<Domaine> domaine = domaineRepository.findByName(name.toLowerCase());
+        List<DomaineDto> result = new ArrayList<DomaineDto>();
+        for(Domaine d : domaine) {
+         result.add(MapperCommun.convert(d, DomaineDto.class));
         }
-        return null;
+        return result;
     }
 
     @Override

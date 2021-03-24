@@ -64,7 +64,7 @@ public class PosteServiceImpl implements PosteService{
 
     @Override
     public List<PosteDto> recherchePoste(String recherche) {
-        List<Poste> lst = posteRepository.recherchePoste(recherche);
+        List<Poste> lst = posteRepository.recherchePoste(recherche.toLowerCase());
         List<PosteDto> result = new ArrayList<PosteDto>();
         for (Poste c : lst) {
             result.add(MapperCommun.convert(c, PosteDto.class));

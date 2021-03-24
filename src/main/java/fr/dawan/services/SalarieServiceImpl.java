@@ -29,29 +29,29 @@ import fr.dawan.repositories.SalarieRepository;
 
 @Service
 @Transactional
-public class SalarieServiceImpl implements SalarieService{
-    
+public class SalarieServiceImpl implements SalarieService {
+
     @Autowired
     private SalarieRepository salarieRepository;
-    
+
     @Autowired
     private FormationRepository formationRepository;
-    
+
     @Autowired
     private CompetenceRepository competenceRepository;
-    
+
     @Autowired
     private RoleRepository roleRepository;
-    
+
     @Autowired
     private PosteRepository posteRepository;
-    
+
     @Override
     public List<SalarieDto> findAll() {
         List<Salarie> lst = salarieRepository.findAll();
         List<SalarieDto> result = new ArrayList<SalarieDto>();
-        for(Salarie salarie : lst) {
-         result.add(MapperCommun.convert(salarie, SalarieDto.class));
+        for (Salarie salarie : lst) {
+            result.add(MapperCommun.convert(salarie, SalarieDto.class));
         }
         return result;
     }
@@ -60,8 +60,8 @@ public class SalarieServiceImpl implements SalarieService{
     public List<SalarieDto> getAllSalaries(int page, int max) {
         List<Salarie> lst = salarieRepository.findAll(PageRequest.of(page, max)).get().collect(Collectors.toList());
         List<SalarieDto> result = new ArrayList<SalarieDto>();
-        for(Salarie salarie : lst) {
-         result.add(MapperCommun.convert(salarie, SalarieDto.class));
+        for (Salarie salarie : lst) {
+            result.add(MapperCommun.convert(salarie, SalarieDto.class));
         }
         return result;
     }
@@ -70,8 +70,8 @@ public class SalarieServiceImpl implements SalarieService{
     public List<SalarieDto> findAllSalariesByAdresse(long id) {
         List<Salarie> lst = salarieRepository.findAllSalariesByAdresse(id);
         List<SalarieDto> result = new ArrayList<SalarieDto>();
-        for(Salarie salarie : lst) {
-         result.add(MapperCommun.convert(salarie, SalarieDto.class));
+        for (Salarie salarie : lst) {
+            result.add(MapperCommun.convert(salarie, SalarieDto.class));
         }
         return result;
     }
@@ -80,8 +80,8 @@ public class SalarieServiceImpl implements SalarieService{
     public List<SalarieDto> findAllSalariesByDomaine(long id) {
         List<Salarie> lst = salarieRepository.findAllSalariesByDomaine(id);
         List<SalarieDto> result = new ArrayList<SalarieDto>();
-        for(Salarie salarie : lst) {
-         result.add(MapperCommun.convert(salarie, SalarieDto.class));
+        for (Salarie salarie : lst) {
+            result.add(MapperCommun.convert(salarie, SalarieDto.class));
         }
         return result;
     }
@@ -90,8 +90,8 @@ public class SalarieServiceImpl implements SalarieService{
     public List<SalarieDto> findAllSalariesByEntreprise(long id) {
         List<Salarie> lst = salarieRepository.findAllSalariesByEntreprise(id);
         List<SalarieDto> result = new ArrayList<SalarieDto>();
-        for(Salarie salarie : lst) {
-         result.add(MapperCommun.convert(salarie, SalarieDto.class));
+        for (Salarie salarie : lst) {
+            result.add(MapperCommun.convert(salarie, SalarieDto.class));
         }
         return result;
     }
@@ -100,8 +100,8 @@ public class SalarieServiceImpl implements SalarieService{
     public List<SalarieDto> findAllSalariesByTitrePoste(long id) {
         List<Salarie> lst = salarieRepository.findAllSalariesByTitrePoste(id);
         List<SalarieDto> result = new ArrayList<SalarieDto>();
-        for(Salarie salarie : lst) {
-         result.add(MapperCommun.convert(salarie, SalarieDto.class));
+        for (Salarie salarie : lst) {
+            result.add(MapperCommun.convert(salarie, SalarieDto.class));
         }
         return result;
     }
@@ -109,7 +109,7 @@ public class SalarieServiceImpl implements SalarieService{
     @Override
     public SalarieDto findById(long id) {
         Optional<Salarie> salarie = salarieRepository.findById(id);
-        if(salarie.isPresent()) {
+        if (salarie.isPresent()) {
             return MapperCommun.convert(salarie.get(), SalarieDto.class);
         }
         return null;
@@ -126,8 +126,8 @@ public class SalarieServiceImpl implements SalarieService{
     public List<FormationDto> findFormationBySalarie(long id) {
         List<Formation> lst = formationRepository.findFormationBySalarie(id);
         List<FormationDto> result = new ArrayList<FormationDto>();
-        for(Formation formation : lst) {
-         result.add(MapperCommun.convert(formation, FormationDto.class));
+        for (Formation formation : lst) {
+            result.add(MapperCommun.convert(formation, FormationDto.class));
         }
         return result;
     }
@@ -136,18 +136,18 @@ public class SalarieServiceImpl implements SalarieService{
     public List<RoleDto> findRoleBySalarie(long id) {
         List<Role> lst = roleRepository.findRoleBySalarie(id);
         List<RoleDto> result = new ArrayList<RoleDto>();
-        for(Role role : lst) {
-         result.add(MapperCommun.convert(role, RoleDto.class));
+        for (Role role : lst) {
+            result.add(MapperCommun.convert(role, RoleDto.class));
         }
         return result;
     }
-    
+
     @Override
     public List<CompetenceDto> findCompetenceBySalarie(long id) {
         List<Competence> lst = competenceRepository.findCompetenceBySalarie(id);
         List<CompetenceDto> result = new ArrayList<CompetenceDto>();
-        for(Competence competence : lst) {
-         result.add(MapperCommun.convert(competence, CompetenceDto.class));
+        for (Competence competence : lst) {
+            result.add(MapperCommun.convert(competence, CompetenceDto.class));
         }
         return result;
     }
@@ -155,9 +155,9 @@ public class SalarieServiceImpl implements SalarieService{
     @Override
     public SalarieDto findByEmail(String email) {
         Salarie s = salarieRepository.findByEmail(email);
-        if(s!=null)
+        if (s != null)
             return MapperCommun.convert(s, SalarieDto.class);
-        
+
         return null;
     }
 
@@ -165,13 +165,13 @@ public class SalarieServiceImpl implements SalarieService{
     public List<SalarieListeDto> getAllSalariesWithPosteByPage(int page, int size) {
         List<Poste> lst = posteRepository.getAllSalariesWithPosteByPage(PageRequest.of(page, size));
         List<SalarieListeDto> result = new ArrayList<SalarieListeDto>();
-        for(Poste competence : lst) {
-         result.add(MapperCommun.convert(competence, SalarieListeDto.class));
+        long idSalarie=0;
+        for (Poste competence : lst) {
+            if(competence.getSalarie().getId()!=idSalarie)
+                result.add(MapperCommun.convert(competence, SalarieListeDto.class));
+            idSalarie=competence.getId();
         }
         return result;
     }
-    
-    
-
 
 }

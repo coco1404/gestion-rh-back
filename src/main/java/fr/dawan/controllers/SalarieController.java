@@ -87,7 +87,7 @@ public class SalarieController {
         return salarieService.saveOrUpdate(salarieDto);
     }
     
-    @GetMapping(value = "/Liste/{page}/{size}", produces = "application/json")
+    @GetMapping(value = "/liste/{page}/{size}", produces = "application/json")
     public @ResponseBody List<SalarieListeDto> getAllSalariesWithPosteByPage(@PathVariable("page") int page,
             @PathVariable(value = "size") int size) {
         return salarieService.getAllSalariesWithPosteByPage(page, size);

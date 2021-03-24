@@ -8,7 +8,7 @@ public interface EntrepriseService {
     List<EntrepriseDto> findAll();
     List<EntrepriseDto> getAllEntreprises(int page, int max);
     EntrepriseDto findById(long id);
-    EntrepriseDto findByName(String name);
+    List<EntrepriseDto> findByName(String name);
     EntrepriseDto findByAdresseId(long id);
     void deleteById(long id);
     EntrepriseDto saveOrUpdate(EntrepriseDto rDto);

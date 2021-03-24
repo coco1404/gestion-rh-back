@@ -52,12 +52,13 @@ public class TypeContratServiceImpl implements TypeContratService{
     }
     
     @Override
-    public TypeContratDto findByName(String type) {
-        TypeContrat tc = typeContratRepository.findByName(type);
-        if(tc != null) {
-            return MapperCommun.convert(tc, TypeContratDto.class);
+    public List<TypeContratDto> findByName(String type) {
+        List<TypeContrat> lst = typeContratRepository.findByName(type.toLowerCase());
+        List<TypeContratDto> result = new ArrayList<TypeContratDto>();
+        for(TypeContrat tc : lst) {
+         result.add(MapperCommun.convert(tc, TypeContratDto.class));
         }
-        return null;
+        return result; 
     }
 
 

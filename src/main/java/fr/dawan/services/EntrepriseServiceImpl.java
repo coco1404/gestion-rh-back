@@ -52,12 +52,13 @@ public class EntrepriseServiceImpl implements EntrepriseService{
     }
 
     @Override
-    public EntrepriseDto findByName(String name) {
-        Entreprise entreprise = entrepriseRepository.findByName(name);
-        if(entreprise != null) {
-            return MapperCommun.convert(entreprise, EntrepriseDto.class);
+    public List<EntrepriseDto> findByName(String name) {
+        List<Entreprise> lst = entrepriseRepository.findByName(name.toLowerCase());
+        List<EntrepriseDto> result = new ArrayList<EntrepriseDto>();
+        for(Entreprise entreprise : lst) {
+         result.add(MapperCommun.convert(entreprise, EntrepriseDto.class));
         }
-        return null;
+        return result;
     }
 
     @Override
