@@ -9,6 +9,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @XmlRootElement(name = "salaries")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SalarieDto implements Serializable {
@@ -26,8 +28,8 @@ public class SalarieDto implements Serializable {
     
     @XmlElement
     private String email;
-
-    @XmlElement
+    
+    @JsonIgnore
     private String motDePasse;
 
     @XmlElement
