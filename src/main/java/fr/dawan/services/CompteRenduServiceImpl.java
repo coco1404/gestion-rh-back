@@ -77,4 +77,9 @@ public class CompteRenduServiceImpl implements CompteRenduService{
         compteRenduRepository.deleteById(idCompteRendu);
     }
 
+    @Override
+    public long countCompteRendu() {
+        return compteRenduRepository.count();
+    }
+
 }

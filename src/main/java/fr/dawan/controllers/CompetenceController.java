@@ -25,8 +25,21 @@ public class CompetenceController {
     CompetenceService competenceService;
     
     @GetMapping(produces = "application/json")
-    public List<CompetenceDto> getAllCompetence() {
-        return competenceService.getAllComptence();
+    public ResponseEntity<?> getAllCompetence() throws Exception {
+        List<CompetenceDto> competence = competenceService.getAllComptence();
+        if(competence != null)
+            return ResponseEntity.ok(competence);
+        else
+            throw new Exception("Aucunes compétences");
+    }
+    
+    @GetMapping(value="/count", produces = "application/json")
+    public ResponseEntity<?> countCompetence() throws Exception {
+        long countCompetence = competenceService.countCompetence();
+        if(countCompetence > 0)
+            return ResponseEntity.ok(countCompetence);
+        else
+            throw new Exception("Aucunes compétences");
     }
     
     //CompetenceDto saveOrUpdate(CompetenceDto competenceDto); 

@@ -27,14 +27,22 @@ public class EntretienController {
     
     
     @GetMapping(produces = "application/json")
-    public @ResponseBody List<EntretienDto> getAllEntretiens() {
-        return entretienService.findAll();
+    public @ResponseBody ResponseEntity<?> getAllEntretiens() throws Exception {
+        List<EntretienDto> entretien = entretienService.findAll();
+        if(entretien != null)
+            return ResponseEntity.ok(entretien);
+        else
+            throw new Exception("Aucun entretien");
     }
     
     @GetMapping(value = "/{page}/{size}", produces = "application/json")
-    public @ResponseBody List<EntretienDto> getAllEntretiensByPage(@PathVariable("page") int page,
-            @PathVariable(value = "size") int size) {
-        return entretienService.getAllEntretien(page, size);
+    public @ResponseBody ResponseEntity<?> getAllEntretiensByPage(@PathVariable("page") int page,
+            @PathVariable(value = "size") int size) throws Exception {
+        List<EntretienDto> entretien = entretienService.getAllEntretien(page, size);
+        if(entretien != null)
+            return ResponseEntity.ok(entretien);
+        else
+            throw new Exception("Aucun entretien pour la taille : "+size+" et la page : "+page);
     }
     
 //    @GetMapping(value = "/{date}", produces = { "application/json", "application/xml" })
@@ -43,20 +51,41 @@ public class EntretienController {
 //    }
     
     @GetMapping(value = "/manager/{id}", produces = { "application/json", "application/xml" })
-    public @ResponseBody List<EntretienDto> getEntretienByManager(@PathVariable("id") long id) {
-        return entretienService.getByManager(id);
+    public @ResponseBody ResponseEntity<?> getEntretienByManager(@PathVariable("id") long id) throws Exception {
+        List<EntretienDto> entretien = entretienService.getByManager(id);
+        if(entretien != null)
+            return ResponseEntity.ok(entretien);
+        else
+            throw new Exception("Aucun entretien pour l'id manager : "+id);
     }
     
     @GetMapping(value = "/salarie/{id}", produces = { "application/json", "application/xml" })
-    public @ResponseBody List<EntretienDto> getEntretienBySalarie(@PathVariable("id") long id) {
-        return entretienService.getBySalarie(id);
+    public @ResponseBody ResponseEntity<?> getEntretienBySalarie(@PathVariable("id") long id) throws Exception {
+        List<EntretienDto> entretien =  entretienService.getBySalarie(id);
+        if(entretien != null)
+            return ResponseEntity.ok(entretien);
+        else
+            throw new Exception("Aucun entretien pour l'id salarié : "+id);
     }
     
     @GetMapping(value = "/{id}", produces = { "application/json", "application/xml" })
-    public EntretienDto getEntretienById(@PathVariable("id") long id) {
-        return entretienService.findById(id);
+    public ResponseEntity<?> getEntretienById(@PathVariable("id") long id) throws Exception {
+        EntretienDto entretien = entretienService.findById(id);
+        if(entretien != null)
+            return ResponseEntity.ok(entretien);
+        else
+            throw new Exception("Aucun entretien pour l'id : "+id);
     }
 
+    @GetMapping(value = "/count", produces = { "application/json", "application/xml" })
+    public ResponseEntity<?> countEntretien() throws Exception {
+        long countEntretien = entretienService.countEntretien();
+        if(countEntretien > 0)
+            return ResponseEntity.ok(countEntretien);
+        else
+            throw new Exception("Aucun entretien");
+    }
+    
     @PostMapping(consumes = "application/json", produces = "application/json")
     public EntretienDto saveEntretien(@RequestBody EntretienDto entretienDto) {
         return entretienService.saveOrUpdate(entretienDto);

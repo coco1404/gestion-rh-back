@@ -75,6 +75,11 @@ public class TypeContratServiceImpl implements TypeContratService{
         return MapperCommun.convert(tc, TypeContratDto.class);
     }
 
+    @Override
+    public long countTypeContrat() {
+        return typeContratRepository.count();
+    }
+
 
 
 }

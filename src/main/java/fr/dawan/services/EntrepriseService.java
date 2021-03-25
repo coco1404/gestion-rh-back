@@ -12,4 +12,5 @@ public interface EntrepriseService {
     EntrepriseDto findByAdresseId(long id);
     void deleteById(long id);
     EntrepriseDto saveOrUpdate(EntrepriseDto rDto);
+    long countEntreprise();
 }

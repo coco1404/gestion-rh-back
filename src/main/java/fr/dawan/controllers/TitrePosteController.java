@@ -22,43 +22,66 @@ import fr.dawan.services.TitrePosteService;
 @RestController
 @RequestMapping("/api/titrepostes")
 public class TitrePosteController {
-    
+
     @Autowired
     private TitrePosteService titrePosteService;
-    
-    
+
     @GetMapping(produces = "application/json")
-    public @ResponseBody List<TitrePosteDto> getAllTitrePoste() {
-        return titrePosteService.findAll();
+    public @ResponseBody ResponseEntity<?> getAllTitrePoste() throws Exception {
+        List<TitrePosteDto> titrePoste = titrePosteService.findAll();
+        if (titrePoste != null)
+            return ResponseEntity.ok(titrePoste);
+        else
+            throw new Exception("Aucun titre de poste");
     }
-    
+
     @GetMapping(value = "/{page}/{size}", produces = "application/json")
-    public @ResponseBody List<TitrePosteDto> getAllTitrePosteByPage(@PathVariable("page") int page,
-            @PathVariable(value = "size") int size) {
-        return titrePosteService.getAllTitresPostes(page, size);
+    public @ResponseBody ResponseEntity<?> getAllTitrePosteByPage(@PathVariable("page") int page,
+            @PathVariable(value = "size") int size) throws Exception {
+        List<TitrePosteDto> titrePoste = titrePosteService.getAllTitresPostes(page, size);
+        if (titrePoste != null)
+            return ResponseEntity.ok(titrePoste);
+        else
+            throw new Exception("Aucun titre de poste pour la taille : " + size + " et la page : " + page);
     }
-    
+
     @GetMapping(value = "/{id}", produces = { "application/json", "application/xml" })
-    public TitrePosteDto getTitrePosteById(@PathVariable("id") long id) {
-        return titrePosteService.findById(id);// status = ok, body (objet retourné)
+    public ResponseEntity<?> getTitrePosteById(@PathVariable("id") long id) throws Exception {
+        TitrePosteDto titrePoste = titrePosteService.findById(id);// status = ok, body (objet retourné)
+        if (titrePoste != null)
+            return ResponseEntity.ok(titrePoste);
+        else
+            throw new Exception("Aucun titre de poste pour l'id : " + id);
     }
-    
+
     @GetMapping(value = "/search", produces = { "application/json", "application/xml" })
-    public List<TitrePosteDto> getTitrePosteByName(@RequestParam("name") String name) {
-        return titrePosteService.findByName(name);
+    public ResponseEntity<?> getTitrePosteByName(@RequestParam("name") String name) throws Exception {
+        List<TitrePosteDto> titrePoste = titrePosteService.findByName(name);
+        if (titrePoste != null)
+            return ResponseEntity.ok(titrePoste);
+        else
+            throw new Exception("Aucun titre de poste pour la recherche : " + name);
     }
     
+    @GetMapping(value = "/count", produces = { "application/json", "application/xml" })
+    public ResponseEntity<?> countTitrePoste() throws Exception {
+        long countTitrePoste = titrePosteService.countTitrePoste();
+        if (countTitrePoste > 0)
+            return ResponseEntity.ok(countTitrePoste);
+        else
+            throw new Exception("Aucun titre de poste");
+    }
+
     @PostMapping(consumes = "application/json", produces = "application/json")
     public TitrePosteDto saveTitrePoste(@RequestBody TitrePosteDto tpDto) {
         return titrePosteService.saveOrUpdate(tpDto);
     }
-    
+
     @PutMapping(consumes = "application/json", produces = "application/json")
     public TitrePosteDto updateTitrePoste(@RequestBody TitrePosteDto tpDto) {
         return titrePosteService.saveOrUpdate(tpDto);
     }
 
-    
     @DeleteMapping(value = "/{id}", produces = "text/plain")
     public ResponseEntity<?> deleteTitrePosteById(@PathVariable(value = "id") long id) {
         try {

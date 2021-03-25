@@ -10,4 +10,5 @@ public interface CompetenceService {
     CompetenceDto saveOrUpdate(CompetenceDto competenceDto); 
     void delete(CompetenceDto comptenceDto);
     void deleteById(long idCompetence);
+    long countCompetence();
 }

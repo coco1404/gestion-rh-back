@@ -25,45 +25,91 @@ import fr.dawan.services.FormationService;
 @RestController
 @RequestMapping("/api/formations")
 public class FormationController {
-    
+
     @Autowired
     FormationService formationService;
-    
+
     @GetMapping(value = "/{page}/{size}", produces = "application/json")
-    public List<FormationDto> getAllFormationByPage(@PathVariable("page") int page, @PathVariable("size") int size) {
-        return formationService.getAllFormation(page, size);
+    public ResponseEntity<?> getAllFormationByPage(@PathVariable("page") int page, @PathVariable("size") int size)
+            throws Exception {
+        List<FormationDto> formation = formationService.getAllFormation(page, size);
+        if (formation != null)
+            return ResponseEntity.ok(formation);
+        else
+            throw new Exception("Aucune formation pour la taille : " + size + " et la page : " + page);
     }
-    
+
     @GetMapping(value = "/encours/{page}/{size}", produces = "application/json")
-    public List<FormationDto> getAllFormationEnCours(@PathVariable("page") int page, @PathVariable("size") int size) {
-        return formationService.getAllFormationEnCours(page, size);
+    public ResponseEntity<?> getAllFormationEnCours(@PathVariable("page") int page, @PathVariable("size") int size)
+            throws Exception {
+        List<FormationDto> formation = formationService.getAllFormationEnCours(page, size);
+        if (formation != null)
+            return ResponseEntity.ok(formation);
+        else
+            throw new Exception("Aucune formation en cours pour la taille : " + size + " et la page : " + page);
     }
 
     @GetMapping(value = "/noncommence/{page}/{size}", produces = "application/json")
-    public List<FormationDto> getAllFormationNonCommence(@PathVariable("page") int page, @PathVariable("size") int size) {
-        return formationService.getAllFormationNonCommence(page, size);
+    public ResponseEntity<?> getAllFormationNonCommence(@PathVariable("page") int page, @PathVariable("size") int size)
+            throws Exception {
+        List<FormationDto> formation = formationService.getAllFormationNonCommence(page, size);
+        if (formation != null)
+            return ResponseEntity.ok(formation);
+        else
+            throw new Exception("Aucune formation non commencée pour la taille : " + size + " et la page : " + page);
     }
-    
+
     @GetMapping(value = "/competence/{idCompetence}", produces = "application/json")
-    public List<FormationDto> getAllFormationByIdCompetence(@PathVariable("idCompetence") int idCompetence) {
-        return formationService.getAllFormationByIdCompetence(idCompetence);
+    public ResponseEntity<?> getAllFormationByIdCompetence(@PathVariable("idCompetence") int idCompetence)
+            throws Exception {
+        List<FormationDto> formation = formationService.getAllFormationByIdCompetence(idCompetence);
+        if (formation != null)
+            return ResponseEntity.ok(formation);
+        else
+            throw new Exception("Aucune formation avec l'id competence : " + idCompetence);
     }
-    
+
     @GetMapping(value = "/date", produces = "application/json")
-    public List<FormationDto> getAllFormationByDate(@RequestParam(value = "date", required = true) @DateTimeFormat(pattern="yyyy-MM-dd") Date date) {
-        return formationService.getAllFormationByDate(date);
+    public ResponseEntity<?> getAllFormationByDate(
+            @RequestParam(value = "date", required = true) @DateTimeFormat(pattern = "yyyy-MM-dd") Date date)
+            throws Exception {
+        List<FormationDto> formation = formationService.getAllFormationByDate(date);
+        if (formation != null)
+            return ResponseEntity.ok(formation);
+        else
+            throw new Exception("Aucune formation à la date : " + date);
     }
-    
+
     @GetMapping(value = "/periode", produces = "application/json")
-    public List<FormationDto> getAllFormationByPeriode(@RequestParam(value = "dateDebut", required = true) @DateTimeFormat(pattern="yyyy-MM-dd") Date dateDebut, @RequestParam(value = "dateFin", required = true) @DateTimeFormat(pattern="yyyy-MM-dd") Date dateFin) {
-        return formationService.getAllFormationByPeriode(dateDebut, dateFin);
+    public ResponseEntity<?> getAllFormationByPeriode(
+            @RequestParam(value = "dateDebut", required = true) @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateDebut,
+            @RequestParam(value = "dateFin", required = true) @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateFin)
+            throws Exception {
+        List<FormationDto> formation = formationService.getAllFormationByPeriode(dateDebut, dateFin);
+        if (formation != null)
+            return ResponseEntity.ok(formation);
+        else
+            throw new Exception("Aucune formation entre " + dateDebut + " et " + dateFin);
     }
-    
+
     @GetMapping(value = "/{idFormation}/salaries", produces = "application/json")
-    public List<SalarieDto> getSalarieByIdFormation(@PathVariable("idFormation") int idFormation) {
-        return formationService.getSalarieByIdFormation(idFormation);
+    public ResponseEntity<?> getSalarieByIdFormation(@PathVariable("idFormation") int idFormation) throws Exception {
+        List<SalarieDto> salarie = formationService.getSalarieByIdFormation(idFormation);
+        if (salarie != null)
+            return ResponseEntity.ok(salarie);
+        else
+            throw new Exception("Aucun salarié pour l'id formation " + idFormation);
     }
     
+    @GetMapping(value = "/count", produces = "application/json")
+    public ResponseEntity<?> countFormation() throws Exception {
+        long countSalarie = formationService.countFormation();
+        if (countSalarie > 0)
+            return ResponseEntity.ok(countSalarie);
+        else
+            throw new Exception("Aucun salarié");
+    }
+
     @PostMapping(consumes = "application/json", produces = "application/json")
     public CreateFormationDto saveFormation(@RequestBody CreateFormationDto fDto) {
         return formationService.saveOrUpdate(fDto);
@@ -73,7 +119,7 @@ public class FormationController {
     public CreateFormationDto updateFormation(@RequestBody CreateFormationDto fDto) {
         return formationService.saveOrUpdate(fDto);
     }
-    
+
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> deleteByIdFormation(@PathVariable(value = "id", required = true) long id) {
         try {

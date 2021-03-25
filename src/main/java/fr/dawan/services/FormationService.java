@@ -17,4 +17,5 @@ public interface FormationService {
     List<SalarieDto> getSalarieByIdFormation(long idFormation);
     void deleteById(long id);
     CreateFormationDto saveOrUpdate(CreateFormationDto formationDto); 
+    long countFormation();
 }

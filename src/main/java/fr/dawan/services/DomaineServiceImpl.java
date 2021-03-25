@@ -73,6 +73,11 @@ public class DomaineServiceImpl implements DomaineService{
         return MapperCommun.convert(domaine, DomaineDto.class);
     }
 
+    @Override
+    public long countDomaine() {
+        return domaineRepository.count();
+    }
+
 
 
 }

@@ -56,4 +56,9 @@ public class CompetenceServiceImpl implements CompetenceService {
         competenceRepository.deleteById(idCompetence);
     }
 
+    @Override
+    public long countCompetence() {
+        return competenceRepository.count();
+    }
+
 }

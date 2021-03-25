@@ -74,4 +74,9 @@ public class TitrePosteServiceImpl implements TitrePosteService{
         return MapperCommun.convert(tp, TitrePosteDto.class);
     }
 
+    @Override
+    public long countTitrePoste() {
+        return titrePosteRepository.count();
+    }
+
 }

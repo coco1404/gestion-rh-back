@@ -20,10 +20,10 @@ import fr.dawan.services.CompteRenduService;
 @RestController
 @RequestMapping("/api/compterendus")
 public class CompteRenduController {
-    
+
     @Autowired
     CompteRenduService compteRenduService;
-    
+
     @PostMapping(consumes = "application/json", produces = "application/json")
     public CompteRenduDto saveCompteRendu(@RequestBody CompteRenduDto cpDto) {
         return compteRenduService.saveOrUpdate(cpDto);
@@ -33,28 +33,52 @@ public class CompteRenduController {
     public CompteRenduDto updateConpteRendu(@RequestBody CompteRenduDto cpDto) {
         return compteRenduService.saveOrUpdate(cpDto);
     }
-    
+
     @GetMapping(value = "/{idCompteRendu}", produces = "application/json")
-    public CompteRenduDto getCompteRenduById(@PathVariable("idCompteRendu") long idCompteRendu) {
-        return compteRenduService.getCompteRenduById(idCompteRendu);
+    public ResponseEntity<?> getCompteRenduById(@PathVariable("idCompteRendu") long idCompteRendu) throws Exception {
+        CompteRenduDto compteRendu = compteRenduService.getCompteRenduById(idCompteRendu);
+        if (compteRendu != null)
+            return ResponseEntity.ok(compteRendu);
+        else
+            throw new Exception("Aucun compte rendu avec l'id : " + idCompteRendu);
     }
-    
+
     @GetMapping(value = "/entretien/{idEntretien}", produces = "application/json")
-    public List<CompteRenduDto> getCompteRenduByEntretien(@PathVariable("idEntretien") long idEntretien) {
-        return compteRenduService.getCompteRenduByIdEntretien(idEntretien);
+    public ResponseEntity<?> getCompteRenduByEntretien(@PathVariable("idEntretien") long idEntretien) throws Exception {
+        List<CompteRenduDto> compteRendu = compteRenduService.getCompteRenduByIdEntretien(idEntretien);
+        if (compteRendu != null)
+            return ResponseEntity.ok(compteRendu);
+        else
+            throw new Exception("Aucun compte rendu pour l'id entretien : " + idEntretien);
     }
-    
+
     @GetMapping(value = "/manager/{idManager}", produces = "application/json")
-    public List<CompteRenduDto> getCompteRenduByManager(@PathVariable("idManager") long idManager) {
-        return compteRenduService.getCompteRenduByIdManagerEntretien(idManager);
+    public ResponseEntity<?> getCompteRenduByManager(@PathVariable("idManager") long idManager) throws Exception {
+        List<CompteRenduDto> compteRendu = compteRenduService.getCompteRenduByIdManagerEntretien(idManager);
+        if (compteRendu != null)
+            return ResponseEntity.ok(compteRendu);
+        else
+            throw new Exception("Aucun compte rendu pour l'id manager : " + idManager);
     }
-    
+
     @GetMapping(value = "/salarie/{idSalarie}", produces = "application/json")
-    public List<CompteRenduDto> getCompteRenduBySalarie(@PathVariable("idSalarie") long idSalarie) {
-        return compteRenduService.getCompteRenduByIdSalarie(idSalarie);
+    public ResponseEntity<?> getCompteRenduBySalarie(@PathVariable("idSalarie") long idSalarie) throws Exception {
+        List<CompteRenduDto> compteRendu = compteRenduService.getCompteRenduByIdSalarie(idSalarie);
+        if (compteRendu != null)
+            return ResponseEntity.ok(compteRendu);
+        else
+            throw new Exception("Aucun compte rendu pour l'id salarié : " + idSalarie);
     }
     
-    
+    @GetMapping(value = "/count", produces = "application/json")
+    public ResponseEntity<?> countCompteRendu() throws Exception {
+        long countCompteRendu = compteRenduService.countCompteRendu();
+        if (countCompteRendu > 0)
+            return ResponseEntity.ok(countCompteRendu);
+        else
+            throw new Exception("Aucun compte rendu");
+    }
+
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> deleteById(@PathVariable(value = "id", required = true) long id) {
         try {

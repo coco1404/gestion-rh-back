@@ -11,4 +11,5 @@ public interface RoleService {
     RoleDto findById(long id);
     void deleteById(long id);
     RoleDto saveOrUpdate(RoleDto rDto);
+    long countRole();
 }

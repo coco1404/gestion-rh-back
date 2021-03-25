@@ -74,4 +74,9 @@ public class RoleServiceImpl implements RoleService{
         return MapperCommun.convert(role, RoleDto.class);
     }
 
+    @Override
+    public long countRole() {
+        return roleRepository.count();
+    }
+
 }

@@ -22,4 +22,5 @@ public interface SalarieService {
     List<RoleDto> findRoleBySalarie(long id);
     List<CompetenceDto> findCompetenceBySalarie(long id);
     List<SalarieListeDto> getAllSalariesWithPosteByPage(int page, int size);
+    long countSalarie();
 }

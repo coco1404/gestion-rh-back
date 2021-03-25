@@ -83,4 +83,9 @@ public class EntretienServiceImpl implements EntretienService{
         return MapperCommun.convert(entretien, EntretienDto.class);
     }
 
+    @Override
+    public long countEntretien() {
+        return entretienRepository.count(); 
+    }
+
 }

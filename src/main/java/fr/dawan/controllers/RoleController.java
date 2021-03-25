@@ -24,40 +24,63 @@ import fr.dawan.services.RoleService;
 public class RoleController {
     @Autowired
     private RoleService roleService;
-    
-    
+
     @GetMapping(produces = "application/json")
-    public @ResponseBody List<RoleDto> getAllRoles() {
-        return roleService.findAll();
+    public @ResponseBody ResponseEntity<?> getAllRoles() throws Exception {
+        List<RoleDto> role = roleService.findAll();
+        if (role != null)
+            return ResponseEntity.ok(role);
+        else
+            throw new Exception("Aucun role");
     }
-    
+
     @GetMapping(value = "/{page}/{size}", produces = "application/json")
-    public @ResponseBody List<RoleDto> getAllRolesPage(@PathVariable("page") int page,
-            @PathVariable(value = "size") int size) {
-        return roleService.getAllRoles(page, size);
+    public @ResponseBody ResponseEntity<?> getAllRolesPage(@PathVariable("page") int page,
+            @PathVariable(value = "size") int size) throws Exception {
+        List<RoleDto> role = roleService.getAllRoles(page, size);
+        if (role != null)
+            return ResponseEntity.ok(role);
+        else
+            throw new Exception("Aucun role pour la taille : " + size + " et la page : " + page);
     }
-    
+
     @GetMapping(value = "/{id}", produces = { "application/json", "application/xml" })
-    public RoleDto getRoleById(@PathVariable("id") long id) {
-        return roleService.findById(id);// status = ok, body (objet retourné)
+    public ResponseEntity<?> getRoleById(@PathVariable("id") long id) throws Exception {
+        RoleDto role = roleService.findById(id);// status = ok, body (objet retourné)
+        if (role != null)
+            return ResponseEntity.ok(role);
+        else
+            throw new Exception("Aucun role pour l'id : " + id);
     }
-    
+
     @GetMapping(value = "/search", produces = { "application/json", "application/xml" })
-    public List<RoleDto> getRoleByName(@RequestParam("name") String name) {
-        return roleService.findByName(name);
+    public ResponseEntity<?> getRoleByName(@RequestParam("name") String name) throws Exception {
+        List<RoleDto> role = roleService.findByName(name);
+        if (role != null)
+            return ResponseEntity.ok(role);
+        else
+            throw new Exception("Aucun role pour la recherche : " + name);
     }
     
+    @GetMapping(value = "/count", produces = { "application/json", "application/xml" })
+    public ResponseEntity<?> countRole() throws Exception {
+        long countRole = roleService.countRole();
+        if (countRole > 0)
+            return ResponseEntity.ok(countRole);
+        else
+            throw new Exception("Aucun role");
+    }
+
     @PostMapping(consumes = "application/json", produces = "application/json")
     public RoleDto saveRole(@RequestBody RoleDto rDto) {
         return roleService.saveOrUpdate(rDto);
     }
-    
+
     @PutMapping(consumes = "application/json", produces = "application/json")
     public RoleDto updateRole(@RequestBody RoleDto rDto) {
         return roleService.saveOrUpdate(rDto);
     }
 
-    
     @DeleteMapping(value = "/{id}", produces = "text/plain")
     public ResponseEntity<?> deleteRoleById(@PathVariable(value = "id") long id) {
         try {

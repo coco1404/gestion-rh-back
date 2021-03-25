@@ -111,4 +111,9 @@ public class FormationServiceImpl implements FormationService {
         return result;
     }
 
+    @Override
+    public long countFormation() {
+        return salarieRepository.count();
+    }
+
 }

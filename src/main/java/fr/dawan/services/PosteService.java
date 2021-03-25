@@ -15,4 +15,5 @@ public interface PosteService {
     PosteDto saveOrUpdate(PosteDto posteDto); 
     void delete(PosteDto posteDto);
     void deleteById(long idPoste);
+    long countPoste();
 }

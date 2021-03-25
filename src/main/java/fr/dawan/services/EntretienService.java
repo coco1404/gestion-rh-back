@@ -12,4 +12,5 @@ public interface EntretienService {
     EntretienDto findById(long id);
     void deleteById(long id);
     EntretienDto saveOrUpdate(EntretienDto entretienDto);
+    long countEntretien();
 }

@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import fr.dawan.dto.SalarieDto;
 import fr.dawan.entities.Salarie;
 
 public interface SalarieRepository extends JpaRepository<Salarie, Long> {

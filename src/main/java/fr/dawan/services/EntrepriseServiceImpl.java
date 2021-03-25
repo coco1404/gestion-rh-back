@@ -82,4 +82,9 @@ public class EntrepriseServiceImpl implements EntrepriseService{
         return MapperCommun.convert(entreprise, EntrepriseDto.class);
     }
 
+    @Override
+    public long countEntreprise() {
+        return entrepriseRepository.count();
+    }
+
 }

@@ -24,40 +24,63 @@ import fr.dawan.services.DomaineService;
 public class DomaineController {
     @Autowired
     private DomaineService domaineService;
-    
-    
+
     @GetMapping(produces = "application/json")
-    public @ResponseBody List<DomaineDto> getAllDomaine() {
-        return domaineService.findAll();
+    public @ResponseBody ResponseEntity<?> getAllDomaine() throws Exception {
+        List<DomaineDto> domaine = domaineService.findAll();
+        if (domaine != null)
+            return ResponseEntity.ok(domaine);
+        else
+            throw new Exception("Aucun domaine");
     }
-    
+
     @GetMapping(value = "/{page}/{size}", produces = "application/json")
-    public @ResponseBody List<DomaineDto> getAllDomaineByPage(@PathVariable("page") int page,
-            @PathVariable(value = "size") int size) {
-        return domaineService.getAllDomaines(page, size);
+    public @ResponseBody ResponseEntity<?> getAllDomaineByPage(@PathVariable("page") int page,
+            @PathVariable(value = "size") int size) throws Exception {
+        List<DomaineDto> domaine = domaineService.getAllDomaines(page, size);
+        if (domaine != null)
+            return ResponseEntity.ok(domaine);
+        else
+            throw new Exception("Aucun domaine pour la taille : " + size + " et la page : " + page);
     }
-    
+
     @GetMapping(value = "/{id}", produces = { "application/json", "application/xml" })
-    public DomaineDto getDomaineById(@PathVariable("id") long id) {
-        return domaineService.getById(id);// status = ok, body (objet retourné)
+    public ResponseEntity<?> getDomaineById(@PathVariable("id") long id) throws Exception {
+        DomaineDto domaine = domaineService.getById(id);// status = ok, body (objet retourné)
+        if (domaine != null)
+            return ResponseEntity.ok(domaine);
+        else
+            throw new Exception("Aucun domaine pour l'id : " + id);
+    }
+
+    @GetMapping(value = "/search", produces = { "application/json", "application/xml" })
+    public ResponseEntity<?> getDomaineByName(@RequestParam("name") String name) throws Exception {
+        List<DomaineDto> domaine = domaineService.findByName(name);
+        if (domaine != null)
+            return ResponseEntity.ok(domaine);
+        else
+            throw new Exception("Aucun domaine pour le nom : " + name);
     }
     
-    @GetMapping(value = "/search", produces = { "application/json", "application/xml" })
-    public List<DomaineDto> getDomaineByName(@RequestParam("name") String name) {
-        return domaineService.findByName(name);
+    @GetMapping(value = "/count", produces = { "application/json", "application/xml" })
+    public ResponseEntity<?> countDomaine() throws Exception {
+        long countDomaine = domaineService.countDomaine();
+        if (countDomaine > 0)
+            return ResponseEntity.ok(countDomaine);
+        else
+            throw new Exception("Aucun domaine");
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
     public DomaineDto saveDomaine(@RequestBody DomaineDto dDto) {
         return domaineService.saveOrUpdate(dDto);
     }
-    
+
     @PutMapping(consumes = "application/json", produces = "application/json")
     public DomaineDto updateDomaine(@RequestBody DomaineDto dDto) {
         return domaineService.saveOrUpdate(dDto);
     }
 
-    
     @DeleteMapping(value = "/{id}", produces = "text/plain")
     public ResponseEntity<?> deleteById(@PathVariable(value = "id") long id) {
         try {

@@ -11,4 +11,5 @@ public interface TitrePosteService {
     TitrePosteDto findById(long id);
     void deleteById(long id);
     TitrePosteDto saveOrUpdate(TitrePosteDto tpDto);
+    long countTitrePoste();
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,35 +25,46 @@ public class AdresseController {
 
     @Autowired
     private AdresseService adresseService;
-    
-    
+
+    ///api/adresses?filtre=ville&sort=ASC
     @GetMapping(produces = "application/json")
-    public @ResponseBody List<AdresseDto> getAllAdresse() {
-        return adresseService.findAll();
+    public @ResponseBody ResponseEntity<?> getAllAdresse(@RequestParam("filtre") String filtre, @RequestParam("sort") String sort) throws Exception {
+        List<AdresseDto> adresse = adresseService.findAll(filtre, sort);
+        if (adresse != null)
+            return ResponseEntity.ok(adresse);
+        else
+            throw new Exception("Aucunes adresses");
     }
-    
+
     @GetMapping(value = "/{page}/{size}", produces = "application/json")
-    public @ResponseBody List<AdresseDto> getAllAdresseByPage(@PathVariable("page") int page,
-            @PathVariable(value = "size") int size) {
-        return adresseService.getAllAdresses(page, size);
+    public @ResponseBody ResponseEntity<?> getAllAdresseByPage(@PathVariable("page") int page,
+            @PathVariable(value = "size") int size) throws Exception {
+        List<AdresseDto> adresse = adresseService.getAllAdresses(page, size);
+        if (adresse != null)
+            return ResponseEntity.ok(adresse);
+        else
+            throw new Exception("Aucune adresse pour la taille : " + size + " et la page : " + page);
     }
-    
+
     @GetMapping(value = "/{id}", produces = { "application/json", "application/xml" })
-    public AdresseDto getAdresseById(@PathVariable("id") long id) {
-        return adresseService.getById(id);// status = ok, body (objet retourné)
+    public ResponseEntity<?> getAdresseById(@PathVariable("id") long id) throws Exception {
+        AdresseDto adresse = adresseService.getById(id);// status = ok, body (objet retourné)
+        if (adresse != null)
+            return ResponseEntity.ok(adresse);
+        else
+            throw new Exception("Aucune adresse pour l'id : " + id);
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
     public AdresseDto saveAdresse(@RequestBody AdresseDto aDto) {
         return adresseService.saveOrUpdate(aDto);
     }
-    
+
     @PutMapping(consumes = "application/json", produces = "application/json")
     public AdresseDto updateAdresse(@RequestBody AdresseDto aDto) {
         return adresseService.saveOrUpdate(aDto);
     }
 
-    
     @DeleteMapping(value = "/{id}", produces = "text/plain")
     public ResponseEntity<?> deleteById(@PathVariable(value = "id") long id) {
         try {

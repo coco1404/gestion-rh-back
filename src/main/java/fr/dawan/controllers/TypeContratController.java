@@ -24,40 +24,63 @@ import fr.dawan.services.TypeContratService;
 public class TypeContratController {
     @Autowired
     private TypeContratService typeContratService;
-    
-    
+
     @GetMapping(produces = "application/json")
-    public @ResponseBody List<TypeContratDto> getAllTypeContrat() {
-        return typeContratService.findAll();
+    public @ResponseBody ResponseEntity<?> getAllTypeContrat() throws Exception {
+        List<TypeContratDto> typeContrat = typeContratService.findAll();
+        if (typeContrat != null)
+            return ResponseEntity.ok(typeContrat);
+        else
+            throw new Exception("Aucun type de contrat");
     }
-    
+
     @GetMapping(value = "/{page}/{size}", produces = "application/json")
-    public @ResponseBody List<TypeContratDto> getAllTypeContratByPage(@PathVariable("page") int page,
-            @PathVariable(value = "size") int size) {
-        return typeContratService.getAllTypeContracts(page, size);
+    public @ResponseBody ResponseEntity<?> getAllTypeContratByPage(@PathVariable("page") int page,
+            @PathVariable(value = "size") int size) throws Exception {
+        List<TypeContratDto> typeContrat = typeContratService.getAllTypeContracts(page, size);
+        if (typeContrat != null)
+            return ResponseEntity.ok(typeContrat);
+        else
+            throw new Exception("Aucun type de contrat pour la taille : " + size + " et la page : " + page);
     }
-    
+
     @GetMapping(value = "/{id}", produces = { "application/json", "application/xml" })
-    public TypeContratDto getTypeContratById(@PathVariable("id") long id) {
-        return typeContratService.findById(id);// status = ok, body (objet retourné)
+    public ResponseEntity<?> getTypeContratById(@PathVariable("id") long id) throws Exception {
+        TypeContratDto typeContrat = typeContratService.findById(id);// status = ok, body (objet retourné)
+        if (typeContrat != null)
+            return ResponseEntity.ok(typeContrat);
+        else
+            throw new Exception("Aucun type de contrat pour l'id : " + id);
     }
-    
+
     @GetMapping(value = "/search", produces = { "application/json", "application/xml" })
-    public List<TypeContratDto> getTypeContratByName(@RequestParam("name") String name) {
-        return typeContratService.findByName(name);
+    public ResponseEntity<?> getTypeContratByName(@RequestParam("name") String name) throws Exception {
+        List<TypeContratDto> typeContrat = typeContratService.findByName(name);
+        if (typeContrat != null)
+            return ResponseEntity.ok(typeContrat);
+        else
+            throw new Exception("Aucun type de contrat pour la recherche : " + name);
+    }
+
+    @GetMapping(value = "/count", produces = { "application/json", "application/xml" })
+    public ResponseEntity<?> countTypeContrat() throws Exception {
+        long countTypeContrat = typeContratService.countTypeContrat();
+        if (countTypeContrat > 0)
+            return ResponseEntity.ok(countTypeContrat);
+        else
+            throw new Exception("Aucun type de contrat");
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
     public TypeContratDto saveTypeContrat(@RequestBody TypeContratDto tcDto) {
         return typeContratService.saveOrUpdate(tcDto);
     }
-    
+
     @PutMapping(consumes = "application/json", produces = "application/json")
     public TypeContratDto updateTypeContrat(@RequestBody TypeContratDto tcDto) {
         return typeContratService.saveOrUpdate(tcDto);
     }
 
-    
     @DeleteMapping(value = "/{id}", produces = "text/plain")
     public ResponseEntity<?> deleteTypeContratById(@PathVariable(value = "id") long id) {
         try {

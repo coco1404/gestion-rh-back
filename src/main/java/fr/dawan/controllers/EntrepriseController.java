@@ -27,29 +27,61 @@ public class EntrepriseController {
     
     
     @GetMapping(produces = "application/json")
-    public @ResponseBody List<EntrepriseDto> getAllEntreprises() {
-        return entrepriseService.findAll();
+    public @ResponseBody ResponseEntity<?> getAllEntreprises() throws Exception {
+        List<EntrepriseDto> entreprise = entrepriseService.findAll();
+        if(entreprise != null)
+            return ResponseEntity.ok(entreprise);
+        else
+            throw new Exception("Aucune entreprise");
     }
     
     @GetMapping(value = "/{page}/{size}", produces = "application/json")
-    public @ResponseBody List<EntrepriseDto> getAllEntreprisesPage(@PathVariable("page") int page,
-            @PathVariable(value = "size") int size) {
-        return entrepriseService.getAllEntreprises(page, size);
+    public @ResponseBody ResponseEntity<?> getAllEntreprisesPage(@PathVariable("page") int page,
+            @PathVariable(value = "size") int size) throws Exception {
+        List<EntrepriseDto> entreprise = entrepriseService.getAllEntreprises(page, size);
+        if(entreprise != null)
+            return ResponseEntity.ok(entreprise);
+        else
+            throw new Exception("Aucune entreprise pour la taille : "+size+" et la page : "+page);
     }
     
     @GetMapping(value = "/{id}", produces = { "application/json", "application/xml" })
-    public EntrepriseDto getEntrepriseById(@PathVariable("id") long id) {
-        return entrepriseService.findById(id);// status = ok, body (objet retourné)
+    public ResponseEntity<?> getEntrepriseById(@PathVariable("id") long id) throws Exception {
+        EntrepriseDto entreprise =  entrepriseService.findById(id);// status = ok, body (objet retourné)
+        if(entreprise != null)
+            return ResponseEntity.ok(entreprise);
+        else
+            throw new Exception("Aucune entreprise pour l'id : "+id);
     }
     
     @GetMapping(value = "/search", produces = { "application/json", "application/xml" })
-    public List<EntrepriseDto> getEntrepriseByName(@RequestParam("name") String name) {
-        return entrepriseService.findByName(name);
+    public ResponseEntity<?> getEntrepriseByName(@RequestParam("name") String name) throws Exception {
+        List<EntrepriseDto> entreprise = entrepriseService.findByName(name);
+        if(entreprise != null)
+            return ResponseEntity.ok(entreprise);
+        else
+            throw new Exception("Aucune entreprise pour le nom : "+name);
     }
+    
     @GetMapping(value = "/adresse/{id}", produces = { "application/json", "application/xml" })
-    public EntrepriseDto getEntrepriseByAdresse(@PathVariable("id") long id) {
-        return entrepriseService.findByAdresseId(id);
+    public ResponseEntity<?> getEntrepriseByAdresse(@PathVariable("id") long id) throws Exception {
+        EntrepriseDto entreprise = entrepriseService.findByAdresseId(id);
+        if(entreprise != null)
+            return ResponseEntity.ok(entreprise);
+        else
+            throw new Exception("Aucune entreprise l'id adresse : "+id);
     }
+    
+    @GetMapping(value = "/count", produces = { "application/json", "application/xml" })
+    public ResponseEntity<?> countEntreprise() throws Exception {
+        long countEntreprise = entrepriseService.countEntreprise();
+        if(countEntreprise > 0)
+            return ResponseEntity.ok(countEntreprise);
+        else
+            throw new Exception("Aucune entreprise");
+    }
+
+    
     @PostMapping(consumes = "application/json", produces = "application/json")
     public EntrepriseDto saveEntreprise(@RequestBody EntrepriseDto eDto) {
         return entrepriseService.saveOrUpdate(eDto);

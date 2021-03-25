@@ -12,5 +12,6 @@ public interface CompteRenduService {
     CompteRenduDto getCompteRenduById(long idCompteRendu);
     void delete(CompteRenduDto compteRenduDto);
     void deleteById(long idCompteRendu);
+    long countCompteRendu();
 
 }

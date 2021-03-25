@@ -11,5 +11,6 @@ public interface DomaineService {
     List<DomaineDto> findByName(String name);
     void deleteById(long id);
     DomaineDto saveOrUpdate(DomaineDto dDto);
+    long countDomaine();
 
 }

@@ -174,4 +174,9 @@ public class SalarieServiceImpl implements SalarieService {
         return result;
     }
 
+    @Override
+    public long countSalarie() {
+        return salarieRepository.count();
+    }
+
 }

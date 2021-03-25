@@ -11,5 +11,5 @@ public interface TypeContratService {
     TypeContratDto findById(long id);
     void deleteById(long id);
     TypeContratDto saveOrUpdate(TypeContratDto tcDto);
-    
+    long countTypeContrat();
 }

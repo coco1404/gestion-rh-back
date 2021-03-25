@@ -100,4 +100,9 @@ public class PosteServiceImpl implements PosteService{
         posteRepository.deleteById(idPoste);
     }
 
+    @Override
+    public long countPoste() {
+        return posteRepository.count();
+    }
+
 }
