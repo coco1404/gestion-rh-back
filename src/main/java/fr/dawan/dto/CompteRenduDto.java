@@ -22,15 +22,18 @@ public class CompteRenduDto implements Serializable {
 
     @XmlElement
     private Date dateCreation;
+    
+    @XmlElement
+    private int version;
 
     public CompteRenduDto() {
     }
 
-    public CompteRenduDto(long id, String compteRendu, Date dateCreation) {
-        super();
+    public CompteRenduDto(long id, String compteRendu, Date dateCreation, int version) {
         this.id = id;
         this.compteRendu = compteRendu;
         this.dateCreation = dateCreation;
+        this.version = version;
     }
 
     public long getId() {
@@ -55,6 +58,14 @@ public class CompteRenduDto implements Serializable {
 
     public void setDateCreation(Date dateCreation) {
         this.dateCreation = dateCreation;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 
 }

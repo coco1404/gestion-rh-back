@@ -33,13 +33,15 @@ public class AdresseDto implements Serializable {
 
     @XmlElement
     private String pays;
+    
+    @XmlElement
+    private int version;
 
     public AdresseDto() {
     }
 
     public AdresseDto(long id, String numero, String voie, String ville, String complementAdresse, String codePostal,
-            String pays) {
-        super();
+            String pays, int version) {
         this.id = id;
         this.numero = numero;
         this.voie = voie;
@@ -47,7 +49,10 @@ public class AdresseDto implements Serializable {
         this.complementAdresse = complementAdresse;
         this.codePostal = codePostal;
         this.pays = pays;
+        this.version = version;
     }
+
+
 
     public long getId() {
         return id;
@@ -103,6 +108,14 @@ public class AdresseDto implements Serializable {
 
     public void setPays(String pays) {
         this.pays = pays;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 
 }

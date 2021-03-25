@@ -18,13 +18,17 @@ public class TypeContratDto implements Serializable {
 
     @XmlElement
     private String type;
+    
+    @XmlElement
+    private int version;
 
     public TypeContratDto() {
     }
 
-    public TypeContratDto(long id, String type) {
+    public TypeContratDto(long id, String type, int version) {
         this.id = id;
         this.type = type;
+        this.version = version;
     }
 
     public long getId() {
@@ -43,5 +47,12 @@ public class TypeContratDto implements Serializable {
         this.type = type;
     }
 
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
+    }
     
 }

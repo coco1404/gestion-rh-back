@@ -33,12 +33,9 @@ public class FormationDto implements Serializable {
 
     @XmlElement
     private float prix;
-
-//    @XmlElement
-//    private List<SalarieDto> salaries;
-//
-//    @XmlElement
-//    private List<CompetenceDto> competences;
+    
+    @XmlElement
+    private int version;
 
     @XmlElement
     private Domaine domaine;
@@ -46,13 +43,13 @@ public class FormationDto implements Serializable {
     public FormationDto() {
     }
 
-    public FormationDto(long id, Date dateDebut, Date dateFin, float duree, float prix, Domaine domaine) {
-        super();
+    public FormationDto(long id, Date dateDebut, Date dateFin, float duree, float prix, int version, Domaine domaine) {
         this.id = id;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
         this.duree = duree;
         this.prix = prix;
+        this.version = version;
         this.domaine = domaine;
     }
 
@@ -104,20 +101,12 @@ public class FormationDto implements Serializable {
         this.domaine = domaine;
     }
 
-//    public List<SalarieDto> getSalaries() {
-//        return salaries;
-//    }
-//
-//    public void setSalaries(List<SalarieDto> salaries) {
-//        this.salaries = salaries;
-//    }
-//
-//    public List<CompetenceDto> getCompetences() {
-//        return competences;
-//    }
-//
-//    public void setCompetences(List<CompetenceDto> competences) {
-//        this.competences = competences;
-//    }
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
+    }
 
 }

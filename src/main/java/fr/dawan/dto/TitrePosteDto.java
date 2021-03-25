@@ -18,16 +18,18 @@ public class TitrePosteDto implements Serializable {
     
     @XmlElement
     private String intitule;
+    
+    @XmlElement
+    private int version;
 
     public TitrePosteDto() {
     }
-
-    public TitrePosteDto(long id, String intitule) {
-        super();
+    
+    public TitrePosteDto(long id, String intitule, int version) {
         this.id = id;
         this.intitule = intitule;
+        this.version = version;
     }
-
     public long getId() {
         return id;
     }
@@ -42,6 +44,14 @@ public class TitrePosteDto implements Serializable {
 
     public void setIntitule(String intitule) {
         this.intitule = intitule;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
     
 }

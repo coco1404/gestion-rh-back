@@ -18,13 +18,17 @@ public class RoleDto implements Serializable {
     
     @XmlElement
     private String titre;
+    
+    @XmlElement
+    private int version;
 
     public RoleDto() {
     }
 
-    public RoleDto(long id, String titre) {
+    public RoleDto(long id, String titre, int version) {
         this.id = id;
         this.titre = titre;
+        this.version = version;
     }
 
     public long getId() {
@@ -41,5 +45,13 @@ public class RoleDto implements Serializable {
 
     public void setTitre(String titre) {
         this.titre = titre;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 }

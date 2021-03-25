@@ -38,12 +38,15 @@ public class CreateFormationDto implements Serializable {
 
     @XmlElement
     private List<CompetenceDto> competences;
+    
+    @XmlElement
+    private int version;
 
     public CreateFormationDto() {
     }
 
     public CreateFormationDto(long id, Date dateDebut, Date dateFin, float duree, float prix, List<SalarieDto> salaries,
-            List<CompetenceDto> competences) {
+            List<CompetenceDto> competences, int version) {
         this.id = id;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
@@ -51,6 +54,7 @@ public class CreateFormationDto implements Serializable {
         this.prix = prix;
         this.salaries = salaries;
         this.competences = competences;
+        this.version = version;
     }
 
     public long getId() {
@@ -107,5 +111,13 @@ public class CreateFormationDto implements Serializable {
 
     public void setCompetences(List<CompetenceDto> competences) {
         this.competences = competences;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 }

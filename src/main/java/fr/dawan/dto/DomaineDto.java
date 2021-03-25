@@ -18,14 +18,17 @@ public class DomaineDto implements Serializable {
 
     @XmlElement
     private String titre;
+    
+    @XmlElement
+    private int version;
 
     public DomaineDto() {
     }
 
-    public DomaineDto(long id, String titre) {
-        super();
+    public DomaineDto(long id, String titre, int version) {
         this.id = id;
         this.titre = titre;
+        this.version = version;
     }
 
     public long getId() {
@@ -43,5 +46,14 @@ public class DomaineDto implements Serializable {
     public void setTitre(String titre) {
         this.titre = titre;
     }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
+    }
+    
 
 }

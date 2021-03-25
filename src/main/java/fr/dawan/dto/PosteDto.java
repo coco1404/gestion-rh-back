@@ -52,14 +52,16 @@ public class PosteDto implements Serializable {
 
     @XmlElement
     private List<CompetenceDto> competencesRequises;
+    
+    @XmlElement
+    private int version;
 
     public PosteDto() {
     }
 
     public PosteDto(long id, TitrePosteDto titrePoste, SalarieDto salarie, TypeContratDto typeContrat, Date dateDebut,
             Date dateFin, float volumeHoraire, float volumeJournalier, SalarieDto manager, String fichierContrat,
-            EntrepriseDto lieuTravail, List<CompetenceDto> competencesRequises) {
-        super();
+            EntrepriseDto lieuTravail, List<CompetenceDto> competencesRequises, int version) {
         this.id = id;
         this.titrePoste = titrePoste;
         this.salarie = salarie;
@@ -72,6 +74,7 @@ public class PosteDto implements Serializable {
         this.fichierContrat = fichierContrat;
         this.lieuTravail = lieuTravail;
         this.competencesRequises = competencesRequises;
+        this.version = version;
     }
 
     public long getId() {
@@ -168,6 +171,14 @@ public class PosteDto implements Serializable {
 
     public void setCompetencesRequises(List<CompetenceDto> competencesRequises) {
         this.competencesRequises = competencesRequises;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 
 }

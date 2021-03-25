@@ -30,19 +30,22 @@ public class SalarieListeDto implements Serializable {
 
     @XmlElement
     private TitrePosteDto posteActuel;
+    
+    @XmlElement
+    private int version;
 
     public SalarieListeDto() {
     }
 
     public SalarieListeDto(long salarieId, String salarieNom, String salariePrenom, DomaineDto domaine,
-            EntrepriseDto entreprise, TitrePosteDto posteActuel) {
-        super();
+            EntrepriseDto entreprise, TitrePosteDto posteActuel, int version) {
         this.salarieId = salarieId;
         this.salarieNom = salarieNom;
         this.salariePrenom = salariePrenom;
         this.domaine = domaine;
         this.entreprise = entreprise;
         this.posteActuel = posteActuel;
+        this.version = version;
     }
 
     public long getSalarieId() {
@@ -91,5 +94,13 @@ public class SalarieListeDto implements Serializable {
 
     public void setPosteActuel(TitrePosteDto posteActuel) {
         this.posteActuel = posteActuel;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 }

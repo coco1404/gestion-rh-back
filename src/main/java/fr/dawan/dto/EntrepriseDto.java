@@ -23,15 +23,18 @@ public class EntrepriseDto implements Serializable {
 
     @XmlElement
     private Adresse adresse;
+    
+    @XmlElement
+    private int version;
 
     public EntrepriseDto() {
     }
 
-    public EntrepriseDto(long id, String nom, Adresse adresse) {
-        super();
+    public EntrepriseDto(long id, String nom, Adresse adresse, int version) {
         this.id = id;
         this.nom = nom;
         this.adresse = adresse;
+        this.version = version;
     }
 
     public long getId() {
@@ -56,6 +59,14 @@ public class EntrepriseDto implements Serializable {
 
     public void setAdresse(Adresse adresse) {
         this.adresse = adresse;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 
 }

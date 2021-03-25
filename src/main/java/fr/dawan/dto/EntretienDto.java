@@ -28,17 +28,21 @@ public class EntretienDto implements Serializable {
     
     @XmlElement
     private SalarieEntretienDto managerEntretien;
+    
+    @XmlElement
+    private int version;
 
     public EntretienDto() {
     }
 
     public EntretienDto(long id, Date dateEntretien, CompteRenduDto compteRendu, SalarieEntretienDto salarie,
-            SalarieEntretienDto managerEntretien) {
+            SalarieEntretienDto managerEntretien, int version) {
         this.id = id;
         this.dateEntretien = dateEntretien;
         this.compteRendu = compteRendu;
         this.salarie = salarie;
         this.managerEntretien = managerEntretien;
+        this.version = version;
     }
 
     public long getId() {
@@ -81,4 +85,11 @@ public class EntretienDto implements Serializable {
         this.managerEntretien = managerEntretien;
     }
 
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
+    }
 }

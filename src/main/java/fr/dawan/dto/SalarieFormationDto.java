@@ -34,13 +34,15 @@ public class SalarieFormationDto implements Serializable {
 
     @XmlElement
     private List<FormationDto> formations;
+    
+    @XmlElement
+    private int version;
 
     public SalarieFormationDto() {
     }
 
     public SalarieFormationDto(long id, String nom, String prenom, String email, DomaineDto domaine,
-            List<CompetenceDto> competences, List<FormationDto> formations) {
-        super();
+            List<CompetenceDto> competences, List<FormationDto> formations, int version) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -48,6 +50,7 @@ public class SalarieFormationDto implements Serializable {
         this.domaine = domaine;
         this.competences = competences;
         this.formations = formations;
+        this.version = version;
     }
 
     public long getId() {
@@ -104,5 +107,13 @@ public class SalarieFormationDto implements Serializable {
 
     public void setFormations(List<FormationDto> formations) {
         this.formations = formations;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 }

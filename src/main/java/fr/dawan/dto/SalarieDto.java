@@ -71,6 +71,9 @@ public class SalarieDto implements Serializable {
 
     @XmlElement
     private List<PosteDto> postes;
+    
+    @XmlElement
+    private int version;
 
     public SalarieDto() {
     }
@@ -78,8 +81,8 @@ public class SalarieDto implements Serializable {
     public SalarieDto(long id, String nom, String prenom, String email, String motDePasse, String telPersonnel,
             String mobilPersonnel, AdresseDto adresse, Date dateNaissance, String telProfessionnel,
             String mobileProfessionnel, DomaineDto domaine, List<RoleDto> roles, List<CompetenceDto> competences,
-            boolean siManager, EntrepriseDto entreprise, List<FormationDto> formations, List<PosteDto> postes) {
-        super();
+            boolean siManager, EntrepriseDto entreprise, List<FormationDto> formations, List<PosteDto> postes,
+            int version) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -98,6 +101,7 @@ public class SalarieDto implements Serializable {
         this.entreprise = entreprise;
         this.formations = formations;
         this.postes = postes;
+        this.version = version;
     }
 
     public long getId() {
@@ -242,6 +246,14 @@ public class SalarieDto implements Serializable {
 
     public void setPostes(List<PosteDto> postes) {
         this.postes = postes;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 
 }
