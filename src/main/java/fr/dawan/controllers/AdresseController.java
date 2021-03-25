@@ -28,7 +28,7 @@ public class AdresseController {
 
     ///api/adresses?filtre=ville&sort=ASC
     @GetMapping(produces = "application/json")
-    public @ResponseBody ResponseEntity<?> getAllAdresse(@RequestParam("filtre") String filtre, @RequestParam("sort") String sort) throws Exception {
+    public @ResponseBody ResponseEntity<?> getAllAdresse(@RequestParam(name = "filtre",required = false) String filtre, @RequestParam(name = "sort",required = false) String sort) throws Exception {
         List<AdresseDto> adresse = adresseService.findAll(filtre, sort);
         if (adresse != null)
             return ResponseEntity.ok(adresse);

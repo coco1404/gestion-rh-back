@@ -27,8 +27,11 @@ public class AdresseServiceImpl implements AdresseService {
     public List<AdresseDto> findAll(String filtre, String sort) {
         
         Sort params = null;
+        if(filtre == null) {
+            filtre = "id";
+        }
         
-        if((sort=="ASC" || sort == null) && filtre != null)
+        if((sort=="ASC" || sort == null))
             params = Sort.by(filtre).ascending();
         else
             params = Sort.by(filtre).descending();
