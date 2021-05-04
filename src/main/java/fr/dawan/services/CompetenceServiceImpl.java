@@ -2,6 +2,7 @@ package fr.dawan.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,16 @@ public class CompetenceServiceImpl implements CompetenceService {
         }
         return result;
     }
-
+    
+    @Override
+    public CompetenceDto getById(long id) {
+        Optional<Competence> c = competenceRepository.findById(id);
+        if(c.isPresent()) {
+            return MapperCommun.convert(c.get(), CompetenceDto.class);
+        }
+        return null;
+    }
+    
     @Override
     public CompetenceDto saveOrUpdate(CompetenceDto competenceDto) {
         Competence c = MapperCommun.convert(competenceDto, Competence.class);
@@ -60,5 +70,4 @@ public class CompetenceServiceImpl implements CompetenceService {
     public long countCompetence() {
         return competenceRepository.count();
     }
-
 }

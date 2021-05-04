@@ -42,6 +42,15 @@ public class CompetenceController {
             throw new Exception("Aucunes compétences");
     }
     
+    @GetMapping(value = "/{id}", produces = { "application/json", "application/xml" })
+    public ResponseEntity<?> getCompetenceById(@PathVariable("id") long id) throws Exception {
+        CompetenceDto competence = competenceService.getById(id);// status = ok, body (objet retourné)
+        if (competence != null)
+            return ResponseEntity.ok(competence);
+        else
+            throw new Exception("Aucune compétence pour l'id : " + id);
+    }
+    
     //CompetenceDto saveOrUpdate(CompetenceDto competenceDto); 
     @PostMapping(consumes = "application/json", produces = "application/json")
     public CompetenceDto saveCompetence(@RequestBody CompetenceDto cDto) {

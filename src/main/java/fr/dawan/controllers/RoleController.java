@@ -73,6 +73,7 @@ public class RoleController {
 
     @PostMapping(consumes = "application/json", produces = "application/json")
     public RoleDto saveRole(@RequestBody RoleDto rDto) {
+        System.out.println("rolewww : "+rDto.getTitre()+" || "+rDto.getId());
         return roleService.saveOrUpdate(rDto);
     }
 
