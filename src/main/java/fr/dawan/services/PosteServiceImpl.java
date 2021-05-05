@@ -3,6 +3,7 @@ package fr.dawan.services;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class PosteServiceImpl implements PosteService{
     PosteRepository posteRepository;
     
     @Override
-    public List<PosteDto> getAllPoste(int page, int size) {
+    public List<PosteDto> getAllPosteByPage(int page, int size) {
         List<Poste> lst = posteRepository.findAll(PageRequest.of(page, size)).get().collect(Collectors.toList());
         List<PosteDto> result = new ArrayList<PosteDto>();
         for (Poste c : lst) {
@@ -103,6 +104,22 @@ public class PosteServiceImpl implements PosteService{
     @Override
     public long countPoste() {
         return posteRepository.count();
+    }
+
+    @Override
+    public List<PosteDto> getAllPoste() {
+        List<Poste> lst = posteRepository.findAll();
+        List<PosteDto> result = new ArrayList<PosteDto>();
+        for (Poste c : lst) {
+            result.add(MapperCommun.convert(c, PosteDto.class));
+        }
+        return result;
+    }
+
+    @Override
+    public PosteDto getPosteById(long id) {
+        Optional<Poste> p = posteRepository.findById(id);
+        return MapperCommun.convert(p, PosteDto.class);
     }
 
 }

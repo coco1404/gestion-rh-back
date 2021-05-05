@@ -35,13 +35,33 @@ public class PosteController {
     @GetMapping(value = "/{page}/{size}", produces = "application/json")
     public ResponseEntity<?> getAllPosteByPage(@PathVariable("page") int page, @PathVariable("size") int size)
             throws Exception {
-        List<PosteDto> poste = posteService.getAllPoste(page, size);
+        List<PosteDto> poste = posteService.getAllPosteByPage(page, size);
         if (poste != null)
             return ResponseEntity.ok(poste);
         else
             throw new Exception("Aucun poste pour la taille : " + size + " et la page : " + page);
     }
+    
+    @GetMapping(produces = "application/json")
+    public ResponseEntity<?> getAllPoste()
+            throws Exception {
+        List<PosteDto> poste = posteService.getAllPoste();
+        if (poste != null)
+            return ResponseEntity.ok(poste);
+        else
+            throw new Exception("Aucun poste");
+    }
 
+    @GetMapping(value = "/{id}", produces = "application/json")
+    public ResponseEntity<?> getPosteById(@PathVariable("id") int id)
+            throws Exception {
+        PosteDto poste = posteService.getPosteById(id);
+        if (poste != null)
+            return ResponseEntity.ok(poste);
+        else
+            throw new Exception("Aucun poste pour l'id : "+id);
+    }
+    
     @GetMapping(value = "/typecontrat/{idTypeContrat}", produces = "application/json")
     public ResponseEntity<?> getAllPosteByTypeContrat(@PathVariable("idTypeContrat") long idTypeContrat)
             throws Exception {

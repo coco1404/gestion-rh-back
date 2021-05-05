@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.dawan.dto.CompetenceDto;
@@ -31,6 +32,16 @@ public class CompetenceController {
             return ResponseEntity.ok(competence);
         else
             throw new Exception("Aucunes compétences");
+    }
+    
+    @GetMapping(value = "/{page}/{size}", produces = "application/json")
+    public @ResponseBody ResponseEntity<?> getAllCompetenceByPage(@PathVariable("page") int page,
+            @PathVariable(value = "size") int size) throws Exception {
+        List<CompetenceDto> competence = competenceService.getAllComptenceByPage(page, size);
+        if (competence != null)
+            return ResponseEntity.ok(competence);
+        else
+            throw new Exception("Aucunes compétences pour la taille : " + size + " et la page : " + page);
     }
     
     @GetMapping(value="/count", produces = "application/json")

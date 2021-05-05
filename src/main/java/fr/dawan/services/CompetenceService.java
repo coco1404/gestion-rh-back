@@ -6,6 +6,7 @@ import fr.dawan.dto.CompetenceDto;
 
 public interface CompetenceService {
     List<CompetenceDto> getAllComptence();
+    List<CompetenceDto> getAllComptenceByPage(int page, int size);
     List<CompetenceDto> getComptenceByIdPoste(long idPoste);//PosteController
     CompetenceDto getById(long id);
     CompetenceDto saveOrUpdate(CompetenceDto competenceDto); 
