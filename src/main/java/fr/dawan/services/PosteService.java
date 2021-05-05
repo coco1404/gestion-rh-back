@@ -6,7 +6,9 @@ import java.util.List;
 import fr.dawan.dto.PosteDto;
 
 public interface PosteService {
-    List<PosteDto> getAllPoste(int page, int size);
+    List<PosteDto> getAllPosteByPage(int page, int size);
+    List<PosteDto> getAllPoste();
+    PosteDto getPosteById(long id);
     List<PosteDto> getPosteByTypeContrat(long idTypeContrat);
     List<PosteDto> getPosteByManager(long idManager);
     List<PosteDto> getPosteByLieuTravail(long idLieuTravail);

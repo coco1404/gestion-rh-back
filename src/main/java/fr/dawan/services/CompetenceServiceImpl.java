@@ -3,8 +3,10 @@ package fr.dawan.services;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -69,5 +71,15 @@ public class CompetenceServiceImpl implements CompetenceService {
     @Override
     public long countCompetence() {
         return competenceRepository.count();
+    }
+
+    @Override
+    public List<CompetenceDto> getAllComptenceByPage(int page, int size) {
+        List<Competence> lst = competenceRepository.findAll(PageRequest.of(page, size)).get().collect(Collectors.toList());
+        List<CompetenceDto> result = new ArrayList<CompetenceDto>();
+        for (Competence a : lst) {
+            result.add(MapperCommun.convert(a, CompetenceDto.class));
+        }
+        return result;
     }
 }
