@@ -121,6 +121,18 @@ public class SalarieServiceImpl implements SalarieService {
         salarie = salarieRepository.saveAndFlush(salarie);
         return MapperCommun.convert(salarie, SalarieDto.class);
     }
+    
+    @Override
+    public SalarieDto updateWithoutPassword(SalarieDto salarieDto) {
+        Salarie salarie = MapperCommun.convert(salarieDto, Salarie.class);
+        Optional<Salarie> oldSalarieOpt = salarieRepository.findById(salarieDto.getId());
+        if(oldSalarieOpt.isPresent()) {
+            Salarie _salarie = oldSalarieOpt.get();
+            salarie.setMotDePasse(_salarie.getMotDePasse());
+        }
+        salarie = salarieRepository.saveAndFlush(salarie);
+        return MapperCommun.convert(salarie, SalarieDto.class);
+    }
 
     @Override
     public List<FormationDto> findFormationBySalarie(long id) {
@@ -178,5 +190,7 @@ public class SalarieServiceImpl implements SalarieService {
     public long countSalarie() {
         return salarieRepository.count();
     }
+
+
 
 }

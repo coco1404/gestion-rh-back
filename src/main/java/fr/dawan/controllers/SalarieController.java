@@ -136,6 +136,11 @@ public class SalarieController {
     public SalarieDto updateSalarie(@RequestBody SalarieDto salarieDto) {
         return salarieService.saveOrUpdate(salarieDto);
     }
+    
+    @PutMapping(value="/without-password",consumes = "application/json", produces = "application/json")
+    public SalarieDto updateWithoutPasswordSalarie(@RequestBody SalarieDto salarieDto) {
+        return salarieService.updateWithoutPassword(salarieDto);
+    }
 
     @GetMapping(value = "/liste/{page}/{size}", produces = "application/json")
     public @ResponseBody ResponseEntity<?> getAllSalariesWithPosteByPage(@PathVariable("page") int page,

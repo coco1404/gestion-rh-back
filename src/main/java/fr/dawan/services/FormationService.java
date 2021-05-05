@@ -18,4 +18,5 @@ public interface FormationService {
     void deleteById(long id);
     CreateFormationDto saveOrUpdate(CreateFormationDto formationDto); 
     long countFormation();
+    FormationDto findById(long id);
 }

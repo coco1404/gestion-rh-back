@@ -18,6 +18,7 @@ public interface SalarieService {
     SalarieDto findById(long id);
     SalarieDto findByEmail(String email);
     SalarieDto saveOrUpdate(SalarieDto salarieDto);
+    SalarieDto updateWithoutPassword(SalarieDto salarieDto);
     List<FormationDto> findFormationBySalarie(long id);
     List<RoleDto> findRoleBySalarie(long id);
     List<CompetenceDto> findCompetenceBySalarie(long id);

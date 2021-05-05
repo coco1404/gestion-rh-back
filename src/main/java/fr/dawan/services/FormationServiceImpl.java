@@ -3,6 +3,7 @@ package fr.dawan.services;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -113,7 +114,16 @@ public class FormationServiceImpl implements FormationService {
 
     @Override
     public long countFormation() {
-        return salarieRepository.count();
+        return formationRepository.count();
+    }
+
+    @Override
+    public FormationDto findById(long id) {
+        Optional<Formation> formation = formationRepository.findById(id);
+        if(formation.isPresent()) {
+            return MapperCommun.convert(formation.get(), FormationDto.class);
+        }
+        return null;
     }
 
 }

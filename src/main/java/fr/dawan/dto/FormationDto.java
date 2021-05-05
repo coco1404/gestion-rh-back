@@ -2,6 +2,7 @@ package fr.dawan.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -24,6 +25,9 @@ public class FormationDto implements Serializable {
 
     @XmlElement
     private Date dateFin;
+    
+    @XmlElement
+    private String titre;
 
     /**
      * durée en heure
@@ -39,18 +43,23 @@ public class FormationDto implements Serializable {
 
     @XmlElement
     private Domaine domaine;
+    
+    @XmlElement
+    private List<CompetenceDto> competences;
 
     public FormationDto() {
     }
 
-    public FormationDto(long id, Date dateDebut, Date dateFin, float duree, float prix, int version, Domaine domaine) {
+    public FormationDto(long id, Date dateDebut, Date dateFin,String titre, float duree, float prix, int version, Domaine domaine,List<CompetenceDto> competences) {
         this.id = id;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
+        this.titre = titre;
         this.duree = duree;
         this.prix = prix;
         this.version = version;
         this.domaine = domaine;
+        this.competences = competences;
     }
 
     public long getId() {
@@ -59,6 +68,14 @@ public class FormationDto implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+    
+    public String getTitre() {
+        return titre;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
     }
 
     public Date getDateDebut() {
@@ -109,4 +126,13 @@ public class FormationDto implements Serializable {
         this.version = version;
     }
 
+    public List<CompetenceDto> getCompetences() {
+        return competences;
+    }
+
+    public void setCompetences(List<CompetenceDto> competences) {
+        this.competences = competences;
+    }
+
+    
 }

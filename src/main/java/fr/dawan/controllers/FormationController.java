@@ -38,6 +38,15 @@ public class FormationController {
         else
             throw new Exception("Aucune formation pour la taille : " + size + " et la page : " + page);
     }
+    
+    @GetMapping(value ="/{id}", produces = "application/json")
+    public ResponseEntity<?> getFormationById(@PathVariable("id") long id) throws Exception {
+        FormationDto formation =  formationService.findById(id);// status = ok, body (objet retourné)
+        if(formation != null)
+            return ResponseEntity.ok(formation);
+        else
+            throw new Exception("Aucune formation pour l'id : "+id);
+    }
 
     @GetMapping(value = "/encours/{page}/{size}", produces = "application/json")
     public ResponseEntity<?> getAllFormationEnCours(@PathVariable("page") int page, @PathVariable("size") int size)
@@ -103,11 +112,11 @@ public class FormationController {
     
     @GetMapping(value = "/count", produces = "application/json")
     public ResponseEntity<?> countFormation() throws Exception {
-        long countSalarie = formationService.countFormation();
-        if (countSalarie > 0)
-            return ResponseEntity.ok(countSalarie);
+        long countFormation = formationService.countFormation();
+        if (countFormation > 0)
+            return ResponseEntity.ok(countFormation);
         else
-            throw new Exception("Aucun salarié");
+            throw new Exception("Aucune formation");
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
