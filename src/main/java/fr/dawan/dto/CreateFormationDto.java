@@ -23,6 +23,9 @@ public class CreateFormationDto implements Serializable {
 
     @XmlElement
     private Date dateFin;
+    
+    @XmlElement
+    private String titre;
 
     /**
      * durée en heure
@@ -34,8 +37,8 @@ public class CreateFormationDto implements Serializable {
     private float prix;
 
     @XmlElement
-    private List<SalarieDto> salaries;
-
+    private DomaineDto domaine;
+    
     @XmlElement
     private List<CompetenceDto> competences;
     
@@ -45,14 +48,15 @@ public class CreateFormationDto implements Serializable {
     public CreateFormationDto() {
     }
 
-    public CreateFormationDto(long id, Date dateDebut, Date dateFin, float duree, float prix, List<SalarieDto> salaries,
-            List<CompetenceDto> competences, int version) {
+    public CreateFormationDto(long id, Date dateDebut, Date dateFin, String titre, float duree, float prix,
+            DomaineDto domaine, List<CompetenceDto> competences, int version) {
         this.id = id;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
+        this.titre = titre;
         this.duree = duree;
         this.prix = prix;
-        this.salaries = salaries;
+        this.domaine = domaine;
         this.competences = competences;
         this.version = version;
     }
@@ -81,6 +85,14 @@ public class CreateFormationDto implements Serializable {
         this.dateFin = dateFin;
     }
 
+    public String getTitre() {
+        return titre;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
+
     public float getDuree() {
         return duree;
     }
@@ -97,12 +109,12 @@ public class CreateFormationDto implements Serializable {
         this.prix = prix;
     }
 
-    public List<SalarieDto> getSalaries() {
-        return salaries;
+    public DomaineDto getDomaine() {
+        return domaine;
     }
 
-    public void setSalaries(List<SalarieDto> salaries) {
-        this.salaries = salaries;
+    public void setDomaine(DomaineDto domaine) {
+        this.domaine = domaine;
     }
 
     public List<CompetenceDto> getCompetences() {
@@ -120,4 +132,6 @@ public class CreateFormationDto implements Serializable {
     public void setVersion(int version) {
         this.version = version;
     }
+    
+    
 }

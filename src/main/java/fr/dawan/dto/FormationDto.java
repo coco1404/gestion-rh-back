@@ -42,7 +42,7 @@ public class FormationDto implements Serializable {
     private int version;
 
     @XmlElement
-    private Domaine domaine;
+    private DomaineDto domaine;
     
     @XmlElement
     private List<CompetenceDto> competences;
@@ -50,7 +50,7 @@ public class FormationDto implements Serializable {
     public FormationDto() {
     }
 
-    public FormationDto(long id, Date dateDebut, Date dateFin,String titre, float duree, float prix, int version, Domaine domaine,List<CompetenceDto> competences) {
+    public FormationDto(long id, Date dateDebut, Date dateFin,String titre, float duree, float prix, int version, DomaineDto domaine,List<CompetenceDto> competences) {
         this.id = id;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
@@ -110,11 +110,11 @@ public class FormationDto implements Serializable {
         this.prix = prix;
     }
 
-    public Domaine getDomaine() {
+    public DomaineDto getDomaine() {
         return domaine;
     }
 
-    public void setDomaine(Domaine domaine) {
+    public void setDomaine(DomaineDto domaine) {
         this.domaine = domaine;
     }
 
