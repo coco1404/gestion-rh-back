@@ -86,6 +86,10 @@ public class PosteServiceImpl implements PosteService{
     @Override
     public PosteDto saveOrUpdate(PosteDto posteDto) {
         Poste p = MapperCommun.convert(posteDto, Poste.class);
+        System.out.println("p = "+(p.getManager() == null));
+        if(p.getManager().getId() == 0) {
+            p.setManager(null);
+        }
         p = posteRepository.saveAndFlush(p);
         return MapperCommun.convert(p, PosteDto.class);
     }

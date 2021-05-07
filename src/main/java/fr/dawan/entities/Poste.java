@@ -55,7 +55,7 @@ public class Poste {
     @Value("${some.key:0}")
     private float volumeJournalier;
 
-    @ManyToOne
+    @ManyToOne(optional = true)
     private Salarie manager;
 
     @Column(nullable = false, length = 255)

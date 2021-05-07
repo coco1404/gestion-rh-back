@@ -1,5 +1,9 @@
 package fr.dawan.controllers;
 
+
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import fr.dawan.dto.CompetenceDto;
 import fr.dawan.dto.PosteDto;
@@ -31,6 +36,9 @@ public class PosteController {
 
     @Autowired
     CompetenceService competenceService;
+    
+    //@Value("${app.storagefolder}")
+    private String storagefolder="C:/tempBidon/";
 
     @GetMapping(value = "/{page}/{size}", produces = "application/json")
     public ResponseEntity<?> getAllPosteByPage(@PathVariable("page") int page, @PathVariable("size") int size)
@@ -148,5 +156,19 @@ public class PosteController {
             return ResponseEntity.ok(countPoste);
         else
             throw new Exception("Aucun poste");
+    }
+    
+    @PostMapping(value = "/save-file", produces = "text/plain", consumes = "multipart/form-data")
+    public String uploadFile(@RequestParam("file") MultipartFile file) {        
+        try {
+            File f = new File(storagefolder + file.getOriginalFilename());
+            try (BufferedOutputStream bw = new BufferedOutputStream(new FileOutputStream(f))) {
+                bw.write(file.getBytes());
+            }
+            return "OK";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "KO";
+        }
     }
 }
