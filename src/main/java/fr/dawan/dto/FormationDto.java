@@ -9,8 +9,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import fr.dawan.entities.Domaine;
-
 @XmlRootElement(name = "formations")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class FormationDto implements Serializable {

@@ -24,7 +24,9 @@ public class Competence {
     private String nom;
 
     @ManyToMany
-    @JoinTable(name = "competences_domaines", joinColumns = @JoinColumn(name = "competence_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "domaine_id", referencedColumnName = "id"))
+    @JoinTable(name = "competence_domaine",
+    joinColumns = @JoinColumn(name = "competence_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "domaine_id", referencedColumnName = "id"))
     private List<Domaine> domaines;
 
     @ManyToMany(mappedBy = "competences")
@@ -92,6 +94,14 @@ public class Competence {
 
     public void setPostes(List<Poste> postes) {
         this.postes = postes;
+    }
+    
+    public List<Domaine> getDomaines() {
+        return domaines;
+    }
+
+    public void setDomaines(List<Domaine> domaines) {
+        this.domaines = domaines;
     }
 
     public int getVersion() {
