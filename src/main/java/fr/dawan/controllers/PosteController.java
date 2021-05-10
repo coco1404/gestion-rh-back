@@ -4,7 +4,6 @@ package fr.dawan.controllers;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -160,15 +159,14 @@ public class PosteController {
     }
     
     @PostMapping(value = "/save-file", produces = "text/plain", consumes = "multipart/form-data")
-    public String uploadFile(@RequestParam("file") MultipartFile file) {
-        
-        System.out.println("file : "+file.getResource().getFilename());
+    public String uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("name") String name, @RequestParam("idPoste") long idPoste) {
         
         try {
-            File f = new File(storagefolder + file.getOriginalFilename());
+            File f = new File(storagefolder + name);
             try (BufferedOutputStream bw = new BufferedOutputStream(new FileOutputStream(f))) {
                 bw.write(file.getBytes());
             }
+            posteService.updateContrat(name, idPoste);  
             return "OK";
         } catch (Exception e) {
             e.printStackTrace();

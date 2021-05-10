@@ -72,7 +72,10 @@ public class Poste {
         @JoinColumn( name="poste_id", referencedColumnName="id"),
         inverseJoinColumns=@JoinColumn(name="competence_id", referencedColumnName="id"))
     private List<Competence> competencesRequises;
-
+    
+    @ManyToOne(optional = true)
+    private Salarie maitreAppretissage;
+    
     @Version
     private int version;
 
@@ -173,6 +176,14 @@ public class Poste {
 
     public void setCompetencesRequises(List<Competence> competencesRequises) {
         this.competencesRequises = competencesRequises;
+    }
+
+    public Salarie getMaitreAppretissage() {
+        return maitreAppretissage;
+    }
+
+    public void setMaitreAppretissage(Salarie maitreAppretissage) {
+        this.maitreAppretissage = maitreAppretissage;
     }
 
     public int getVersion() {

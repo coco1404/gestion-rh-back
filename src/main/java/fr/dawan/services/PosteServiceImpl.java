@@ -90,6 +90,9 @@ public class PosteServiceImpl implements PosteService{
         if(p.getManager().getId() == 0) {
             p.setManager(null);
         }
+        if(p.getMaitreAppretissage().getId() == 0) {
+            p.setMaitreAppretissage(null);
+        }
         p = posteRepository.saveAndFlush(p);
         return MapperCommun.convert(p, PosteDto.class);
     }
@@ -124,6 +127,11 @@ public class PosteServiceImpl implements PosteService{
     public PosteDto getPosteById(long id) {
         Optional<Poste> p = posteRepository.findById(id);
         return MapperCommun.convert(p, PosteDto.class);
+    }
+
+    @Override
+    public void updateContrat(String name, long idPoste) {
+        posteRepository.updateContrat(name, idPoste);
     }
 
 }
