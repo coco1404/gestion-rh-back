@@ -14,4 +14,7 @@ public interface CompetenceRepository extends JpaRepository<Competence, Long> {
     
     @Query("FROM Competence c JOIN FETCH c.salaries cs WHERE cs.id = :id")
     List<Competence> findCompetenceBySalarie(@Param("id") long idSalarie);
+    
+    @Query("FROM Competence c JOIN FETCH c.domaines cd WHERE cd.id = :idDomaine")
+    List<Competence> findCompetenceByIdDomaine(@Param("idDomaine") long idDomaine);
 }

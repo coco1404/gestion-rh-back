@@ -44,6 +44,15 @@ public class CompetenceController {
             throw new Exception("Aucunes compétences pour la taille : " + size + " et la page : " + page);
     }
     
+    @GetMapping(value = "/domaine/{id}", produces = "application/json")
+    public ResponseEntity<?> getAllCompetenceByIdDomaine(@PathVariable("id") int id) throws Exception {
+        List<CompetenceDto> competence = competenceService.getAllComptence();
+        if(competence != null)
+            return ResponseEntity.ok(competence);
+        else
+            throw new Exception("Aucunes compétences");
+    }
+    
     @GetMapping(value="/count", produces = "application/json")
     public ResponseEntity<?> countCompetence() throws Exception {
         long countCompetence = competenceService.countCompetence();

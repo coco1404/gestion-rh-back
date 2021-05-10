@@ -82,4 +82,14 @@ public class CompetenceServiceImpl implements CompetenceService {
         }
         return result;
     }
+
+    @Override
+    public List<CompetenceDto> getAllCompetenceByIdDomaine(long idDomaine) {
+        List<Competence> lst = competenceRepository.findCompetenceByIdDomaine(idDomaine);
+        List<CompetenceDto> result = new ArrayList<CompetenceDto>();
+        for (Competence c : lst) {
+            result.add(MapperCommun.convert(c, CompetenceDto.class));
+        }
+        return result;
+    }
 }
