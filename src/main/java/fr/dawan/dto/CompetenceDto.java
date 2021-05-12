@@ -57,8 +57,8 @@ public class CompetenceDto implements Serializable {
         return domaines;
     }
 
-    public void setDomaines(List<DomaineDto> domaines) {
-        this.domaines = domaines;
+    public void setDomaines(List<DomaineDto> domaine) {
+        this.domaines = domaine;
     }
 
     public int getVersion() {

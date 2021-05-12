@@ -49,7 +49,9 @@ public class Formation {
     private List<Salarie> salaries;
 
     @ManyToMany
-    @JoinTable(name = "formation_competence", joinColumns = @JoinColumn(name = "formation_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "competence_id", referencedColumnName = "id"))
+    @JoinTable(name = "formation_competence",
+    joinColumns = @JoinColumn(name = "formation_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "competence_id", referencedColumnName = "id"))
     private List<Competence> competences;
 
     @ManyToOne
