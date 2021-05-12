@@ -45,6 +45,15 @@ public class SalarieController {
         else
             throw new Exception("Aucun salarié pour la taille : " + size + " et la page : " + page);
     }
+    
+    @GetMapping(value = "/sans-poste", produces = "application/json")
+    public @ResponseBody ResponseEntity<?> getAllSalariesSansPoste() throws Exception {
+        List<SalarieDto> salarie = salarieService.getAllSalariesWithoutPoste();
+        if (salarie != null)
+            return ResponseEntity.ok(salarie);
+        else
+            throw new Exception("Aucun salarié sans poste ");
+    }
 
     @GetMapping(value = "/adresse/{id}", produces = "application/json")
     public @ResponseBody ResponseEntity<?> getSalariesByAdresse(@PathVariable("id") long id) throws Exception {

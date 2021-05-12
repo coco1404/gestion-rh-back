@@ -94,6 +94,14 @@ public class Competence {
         this.postes = postes;
     }
 
+    public List<Domaine> getDomaines() {
+        return domaines;
+    }
+
+    public void setDomaines(List<Domaine> domaines) {
+        this.domaines = domaines;
+    }
+
     public int getVersion() {
         return version;
     }

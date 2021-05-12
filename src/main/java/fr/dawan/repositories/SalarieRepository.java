@@ -31,7 +31,7 @@ public interface SalarieRepository extends JpaRepository<Salarie, Long> {
     @Query("FROM Salarie s WHERE s.email = :email")
     Salarie findByEmail(@Param("email") String email);
     
-    /*@Query("FROM Salarie s JOIN FETCH s.postes f WHERE f.id = :idFormation")
-    List<Salarie> findAll();*/
+    @Query("SELECT DISTINCT s FROM Salarie s LEFT JOIN s.postes p WHERE p.dateFin < CURRENT_DATE() OR p.id IS NULL")
+    List<Salarie> findAllWithoutPoste();
     
 }

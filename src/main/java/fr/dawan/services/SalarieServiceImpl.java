@@ -191,6 +191,16 @@ public class SalarieServiceImpl implements SalarieService {
         return salarieRepository.count();
     }
 
+    @Override
+    public List<SalarieDto> getAllSalariesWithoutPoste() {
+        List<Salarie> lst = salarieRepository.findAllWithoutPoste();
+        List<SalarieDto> result = new ArrayList<SalarieDto>();
+        for (Salarie salarie : lst) {
+            result.add(MapperCommun.convert(salarie, SalarieDto.class));
+        }
+        return result;
+    }
+
 
 
 }
