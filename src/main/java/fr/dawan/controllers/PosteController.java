@@ -129,6 +129,17 @@ public class PosteController {
     public PosteDto updatePoste(@RequestBody PosteDto pDto) {
         return posteService.saveOrUpdate(pDto);
     }
+    
+    @PutMapping(value = "/cloturer-poste/{id}", consumes = "application/json", produces = "text/plain")
+    public String cloturerPoste(@PathVariable("id") long id) {
+        try {
+            posteService.cloturerPoste(id);
+            return "OK";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+        
+    }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> deleteByIdPoste(@PathVariable(value = "id", required = true) long id) {

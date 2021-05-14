@@ -134,4 +134,9 @@ public class PosteServiceImpl implements PosteService{
         posteRepository.updateContrat(name, idPoste);
     }
 
+    @Override
+    public void cloturerPoste(long id) {
+        posteRepository.cloturerPoste(id);
+    }
+
 }
