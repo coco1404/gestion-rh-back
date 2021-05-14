@@ -135,8 +135,11 @@ public class PosteServiceImpl implements PosteService{
     }
 
     @Override
-    public void cloturerPoste(long id) {
-        posteRepository.cloturerPoste(id);
+    public PosteDto cloturerPoste(PosteDto posteDto) {
+        Poste p = MapperCommun.convert(posteDto, Poste.class);
+        p.setDateFin(new Date());
+        p = posteRepository.saveAndFlush(p);
+        return MapperCommun.convert(p, PosteDto.class);
     }
 
 }

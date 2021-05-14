@@ -43,8 +43,4 @@ public interface PosteRepository extends JpaRepository<Poste, Long>{
     @Modifying
     @Query(" UPDATE Poste p set p.fichierContrat = :name where p.id = :idPoste ")
     void updateContrat(@Param("name") String name, @Param("idPoste") long idPoste);
-    
-    @Modifying
-    @Query(" UPDATE Poste p set p.dateFin = CURRENT_DATE() where p.id = :id ")
-    void cloturerPoste(@Param("id") long id);
 }

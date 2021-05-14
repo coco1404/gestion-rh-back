@@ -130,13 +130,13 @@ public class PosteController {
         return posteService.saveOrUpdate(pDto);
     }
     
-    @PutMapping(value = "/cloturer-poste/{id}", consumes = "application/json", produces = "text/plain")
-    public String cloturerPoste(@PathVariable("id") long id) {
+    @PutMapping(value = "/cloturer-poste", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<?> cloturerPoste(@RequestBody PosteDto pDto) throws Exception {
         try {
-            posteService.cloturerPoste(id);
-            return "OK";
+            posteService.cloturerPoste(pDto);
+            return ResponseEntity.ok(pDto);
         } catch (Exception e) {
-            return e.getMessage();
+            throw new Exception(e);
         }
         
     }

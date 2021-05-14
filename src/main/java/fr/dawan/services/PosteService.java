@@ -15,7 +15,7 @@ public interface PosteService {
     List<PosteDto> recherchePoste(String recherche);
     List<PosteDto> recherchePoste(Date dateDebut, Date dateFin);
     PosteDto saveOrUpdate(PosteDto posteDto); 
-    void cloturerPoste(long id);
+    PosteDto cloturerPoste(PosteDto posteDto);
     void updateContrat(String name, long idPoste);
     void delete(PosteDto posteDto);
     void deleteById(long idPoste);
