@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class LoginResponseDto implements Serializable{
 
     private String token;
-    private SalarieDto salarie;
+    private String email;
 
     public LoginResponseDto() {
         
@@ -23,9 +23,9 @@ public class LoginResponseDto implements Serializable{
         this.token = token;
     }
 
-    public LoginResponseDto(String token, SalarieDto salarie) {
+    public LoginResponseDto(String token, String email) {
         this.token = token;
-        this.salarie = salarie;
+        this.email = email;
     }
 
 
@@ -37,15 +37,11 @@ public class LoginResponseDto implements Serializable{
         this.token = token;
     }
 
-
-    public SalarieDto getSalarie() {
-        return salarie;
+    public String getEmail() {
+        return email;
     }
 
-
-    public void setSalarie(SalarieDto salarie) {
-        this.salarie = salarie;
+    public void setEmail(String email) {
+        this.email = email;
     }
-    
-    
 }

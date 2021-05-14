@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -49,6 +50,7 @@ public class Salarie {
     
     @OneToMany(mappedBy = "salarie", fetch = FetchType.LAZY)
     @JsonIgnore
+    @OrderBy("id DESC")
     private List<Poste> postes;
 
     @ManyToOne
