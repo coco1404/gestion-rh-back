@@ -95,14 +95,6 @@ public class Competence {
     public void setPostes(List<Poste> postes) {
         this.postes = postes;
     }
-    
-    public List<Domaine> getDomaines() {
-        return domaines;
-    }
-
-    public void setDomaines(List<Domaine> domaines) {
-        this.domaines = domaines;
-    }
 
     public List<Domaine> getDomaines() {
         return domaines;
