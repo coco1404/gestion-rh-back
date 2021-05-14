@@ -47,7 +47,7 @@ public class SalarieController {
     }
     
     @GetMapping(value = "/sans-poste", produces = "application/json")
-    public @ResponseBody ResponseEntity<?> getAllSalariesSansPoste() throws Exception {
+    public @ResponseBody ResponseEntity<?> getAllSalariesWithoutPoste() throws Exception {
         List<SalarieDto> salarie = salarieService.getAllSalariesWithoutPoste();
         if (salarie != null)
             return ResponseEntity.ok(salarie);

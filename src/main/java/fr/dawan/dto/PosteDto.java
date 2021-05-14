@@ -41,7 +41,7 @@ public class PosteDto implements Serializable {
     @XmlElement
     private float volumeJournalier;
 
-    @XmlElement
+    @JsonIgnoreProperties("postes")
     private SalarieDto manager;
 
     @XmlElement
@@ -53,7 +53,7 @@ public class PosteDto implements Serializable {
     @XmlElement
     private List<CompetenceDto> competencesRequises;
     
-    @XmlElement
+    @JsonIgnoreProperties("postes")
     private SalarieDto maitreAppretissage;
     
     @XmlElement
