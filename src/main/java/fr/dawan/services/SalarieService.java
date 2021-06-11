@@ -11,6 +11,7 @@ import fr.dawan.dto.SalarieListeDto;
 public interface SalarieService {
     List<SalarieDto> findAll();
     List<SalarieDto> getAllSalaries(int page, int max);
+    List<SalarieDto> getAllSalarieByNom(int page, int max, String search);
     List<SalarieDto> findAllSalariesByAdresse(long id);
     List<SalarieDto> findAllSalariesByDomaine(long id);
     List<SalarieDto> findAllSalariesByEntreprise(long id);

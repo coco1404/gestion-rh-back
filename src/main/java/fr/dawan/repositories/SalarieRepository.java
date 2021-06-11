@@ -2,6 +2,8 @@ package fr.dawan.repositories;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -51,5 +53,7 @@ public interface SalarieRepository extends JpaRepository<Salarie, Long> {
     
     @Query("SELECT DISTINCT s FROM Salarie s LEFT JOIN s.domaine d LEFT JOIN s.competences c WHERE d.id = :domaine AND c.id IN (:competence) GROUP BY s.id HAVING COUNT(*) = :nbComp")
     List<Salarie> findAllByDomaineAndCompetence(@Param("domaine") long domaine, @Param("competence") List<Long> competence, @Param("nbComp") long nbComp, Sort sort);
+    
+    Page<Salarie> findAllByNomContaining(String firstname, Pageable pageable);
     
 }

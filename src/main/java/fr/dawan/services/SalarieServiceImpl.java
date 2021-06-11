@@ -59,13 +59,24 @@ public class SalarieServiceImpl implements SalarieService {
 
     @Override
     public List<SalarieDto> getAllSalaries(int page, int max) {
-        List<Salarie> lst = salarieRepository.findAll(PageRequest.of(page, max)).get().collect(Collectors.toList());
+        List<Salarie> lst = salarieRepository.findAll(PageRequest.of(page, max,Sort.by("nom").ascending().and(Sort.by("prenom").ascending()))).get().collect(Collectors.toList());
         List<SalarieDto> result = new ArrayList<SalarieDto>();
         for (Salarie salarie : lst) {
             result.add(MapperCommun.convert(salarie, SalarieDto.class));
         }
         return result;
     }
+    
+    @Override
+   public List<SalarieDto> getAllSalarieByNom(int page, int max, String search) {
+       List<Salarie> lst = salarieRepository.findAllByNomContaining(search, PageRequest.of(page, max,Sort.by("nom").ascending().and(Sort.by("prenom").ascending()))).get().collect(Collectors.toList());
+       List<SalarieDto> result = new ArrayList<SalarieDto>();
+       for (Salarie salarie : lst) {
+           result.add(MapperCommun.convert(salarie, SalarieDto.class));
+       }
+
+       return result;
+   }
 
     @Override
     public List<SalarieDto> findAllSalariesByAdresse(long id) {
