@@ -1,6 +1,7 @@
 package fr.dawan.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -44,6 +45,15 @@ public class SalarieController {
             return ResponseEntity.ok(salarie);
         else
             throw new Exception("Aucun salarié pour la taille : " + size + " et la page : " + page);
+    }
+    
+    @GetMapping(value = "/{page}/{size}/{search}", produces = "application/json")
+    public @ResponseBody List<SalarieDto> getAllByPage(@PathVariable("page") int page,
+            @PathVariable(value = "size") int size, @PathVariable(value = "search", required = false) Optional<String> search) {
+        if(search.isPresent())
+            return salarieService.getAllSalarieByNom(page, size, search.get());
+        else
+            return salarieService.getAllSalarieByNom(page, size, "");
     }
     
     @GetMapping(value = "/sans-poste", produces = "application/json")
