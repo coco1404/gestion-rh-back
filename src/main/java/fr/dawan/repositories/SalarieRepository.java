@@ -2,6 +2,7 @@ package fr.dawan.repositories;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -31,7 +32,24 @@ public interface SalarieRepository extends JpaRepository<Salarie, Long> {
     @Query("FROM Salarie s WHERE s.email = :email")
     Salarie findByEmail(@Param("email") String email);
     
-    @Query("SELECT DISTINCT s FROM Salarie s LEFT JOIN s.postes p WHERE p.dateFin < CURRENT_DATE() OR p.id IS NULL")
+    
+    /*@Query("SELECT DISTINCT s, "
+            + " ( "
+                + " SELECT "
+                    + " CASE "
+                        + " WHEN p2.dateFin IS NULL THEN 'POSTE' "
+                        + " WHEN p2.dateFin > CURRENT_DATE() THEN 'POSTE' "
+                        + " ELSE NULL"
+                    + " END as p"
+                + " FROM s.postes p2 WHERE p2.salarie_id = s.id ORDER BY p2.id DESC LIMIT 1 "
+            + " ) as poste FROM Salarie s HAVING poste IS NULL")*/
+    @Query(value = "SELECT DISTINCT s.*, ( SELECT CASE WHEN p2.date_fin IS NULL THEN 'POSTE' WHEN p2.date_fin > CURRENT_DATE() THEN 'POSTE' ELSE NULL END as p FROM postes p2 WHERE p2.salarie_id = s.id ORDER BY p2.id DESC LIMIT 1 ) as poste FROM salaries s HAVING poste IS NULL ",nativeQuery = true)
     List<Salarie> findAllWithoutPoste();
+    
+    @Query(value = "SELECT DISTINCT s.*, ( SELECT CASE WHEN p2.date_fin IS NULL THEN 'POSTE' WHEN p2.date_fin > CURRENT_DATE() THEN 'POSTE' ELSE NULL END as p FROM postes p2 WHERE p2.salarie_id = s.id ORDER BY p2.id DESC LIMIT 1 ) as poste FROM salaries s LEFT JOIN salarie_competence sc on sc.salarie_id = s.id WHERE s.domaine_id = :domaine AND sc.competence_id IN (:competence) GROUP BY s.id HAVING poste IS NULL AND COUNT(*) = :nbComp ORDER BY s.nom ASC, s.prenom ASC",nativeQuery = true)
+    List<Salarie> findAllWithoutPosteByDomaineAndCompetence(@Param("domaine") long domaine, @Param("competence") List<Long> competence, @Param("nbComp") long nbComp);
+    
+    @Query("SELECT DISTINCT s FROM Salarie s LEFT JOIN s.domaine d LEFT JOIN s.competences c WHERE d.id = :domaine AND c.id IN (:competence) GROUP BY s.id HAVING COUNT(*) = :nbComp")
+    List<Salarie> findAllByDomaineAndCompetence(@Param("domaine") long domaine, @Param("competence") List<Long> competence, @Param("nbComp") long nbComp, Sort sort);
     
 }

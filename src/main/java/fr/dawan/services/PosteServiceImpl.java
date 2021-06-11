@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.dawan.dto.PosteDto;
+import fr.dawan.dto.SalarieDto;
 import fr.dawan.entities.Poste;
+import fr.dawan.entities.Salarie;
 import fr.dawan.mappers.MapperCommun;
 import fr.dawan.repositories.PosteRepository;
 
@@ -126,7 +128,10 @@ public class PosteServiceImpl implements PosteService{
     @Override
     public PosteDto getPosteById(long id) {
         Optional<Poste> p = posteRepository.findById(id);
-        return MapperCommun.convert(p, PosteDto.class);
+        if (p.isPresent()) {
+            return MapperCommun.convert(p.get(), PosteDto.class);
+        }
+        return null;
     }
 
     @Override

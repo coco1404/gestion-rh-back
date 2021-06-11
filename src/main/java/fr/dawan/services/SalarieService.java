@@ -24,5 +24,7 @@ public interface SalarieService {
     List<CompetenceDto> findCompetenceBySalarie(long id);
     List<SalarieListeDto> getAllSalariesWithPosteByPage(int page, int size);
     List<SalarieDto> getAllSalariesWithoutPoste();
+    List<SalarieDto> getAllSalariesWithoutPosteByDomaineAndCompetence(long domaine, List<Long> competence);
+    List<SalarieDto> getAllSalariesByDomaineAndCompetence(long domaine, List<Long> competence);
     long countSalarie();
 }

@@ -160,5 +160,29 @@ public class SalarieController {
         else
             throw new Exception("Aucun salarié avec un poste pour la taille : " + size + " et la page : " + page);
     }
+    
+    @GetMapping(value = "/salaries-domaine-competence/{domaine}/{competence}", produces = "application/json")
+    public @ResponseBody ResponseEntity<?> getAllSalariesByDomaineAndCompetence(@PathVariable("domaine") long domaine,
+            @PathVariable(value = "competence") List<Long> competence) throws Exception {
+        System.out.println("comp : "+competence+" || dom : "+domaine);
+        
+        List<SalarieDto> salarie = salarieService.getAllSalariesByDomaineAndCompetence(domaine, competence);
+        if (salarie != null)
+            return ResponseEntity.ok(salarie);
+        else
+            throw new Exception("Aucun salarié avec le domaine : " + domaine + " et les comptences : " + competence);
+    }
+    
+    @GetMapping(value = "/salaries-sans-poste-domaine-competence/{domaine}/{competence}", produces = "application/json")
+    public @ResponseBody ResponseEntity<?> getAllSalariesWithoutPosteByDomaineAndCompetence(@PathVariable("domaine") long domaine,
+            @PathVariable(value = "competence") List<Long> competence) throws Exception {
+        System.out.println("comp : "+competence+" || dom : "+domaine);
+        
+        List<SalarieDto> salarie = salarieService.getAllSalariesWithoutPosteByDomaineAndCompetence(domaine, competence);
+        if (salarie != null)
+            return ResponseEntity.ok(salarie);
+        else
+            throw new Exception("Aucun salarié avec le domaine : " + domaine + " et les comptences : " + competence);
+    }
 
 }

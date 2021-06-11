@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -201,6 +202,23 @@ public class SalarieServiceImpl implements SalarieService {
         return result;
     }
 
+    @Override
+    public List<SalarieDto> getAllSalariesByDomaineAndCompetence(long domaine, List<Long> competence) {
+        List<Salarie> lst = salarieRepository.findAllByDomaineAndCompetence(domaine, competence, Long.valueOf(competence.size()), Sort.by("nom").ascending().and(Sort.by("prenom").ascending()));
+        List<SalarieDto> result = new ArrayList<SalarieDto>();
+        for (Salarie salarie : lst) {
+            result.add(MapperCommun.convert(salarie, SalarieDto.class));
+        }
+        return result;
+    }
 
-
+    @Override
+    public List<SalarieDto> getAllSalariesWithoutPosteByDomaineAndCompetence(long domaine, List<Long> competence) {
+        List<Salarie> lst = salarieRepository.findAllWithoutPosteByDomaineAndCompetence(domaine, competence, Long.valueOf(competence.size()));
+        List<SalarieDto> result = new ArrayList<SalarieDto>();
+        for (Salarie salarie : lst) {
+            result.add(MapperCommun.convert(salarie, SalarieDto.class));
+        }
+        return result;
+    }
 }

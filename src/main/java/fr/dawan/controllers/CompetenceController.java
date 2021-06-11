@@ -46,7 +46,7 @@ public class CompetenceController {
     
     @GetMapping(value = "/domaine/{id}", produces = "application/json")
     public ResponseEntity<?> getAllCompetenceByIdDomaine(@PathVariable("id") int id) throws Exception {
-        List<CompetenceDto> competence = competenceService.getAllComptence();
+        List<CompetenceDto> competence = competenceService.getAllCompetenceByIdDomaine(id);
         if(competence != null)
             return ResponseEntity.ok(competence);
         else
